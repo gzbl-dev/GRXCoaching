@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="hexBg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#121a27"/>
+      <stop offset="1" stop-color="#090d14"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="5" y1="8" x2="59" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f0d896"/>
+      <stop offset="1" stop-color="#c8a45c"/>
+    </linearGradient>
+  </defs>
+  <polygon points="59,32 45.5,55.38 18.5,55.38 5,32 18.5,8.62 45.5,8.62"
+           fill="url(#hexBg)" stroke="url(#goldGrad)" stroke-width="2.5"/>
+  <text x="32" y="38.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-weight="800" font-size="16.5" letter-spacing="-0.5" fill="url(#goldGrad)">GRX</text>
+  <line x1="21" y1="43.5" x2="43" y2="43.5" stroke="#0ac8b9" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="hexBg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#121a27"/>
+      <stop offset="1" stop-color="#090d14"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="5" y1="8" x2="59" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f0d896"/>
+      <stop offset="1" stop-color="#c8a45c"/>
+    </linearGradient>
+  </defs>
+  <polygon points="59,32 45.5,55.38 18.5,55.38 5,32 18.5,8.62 45.5,8.62"
+           fill="url(#hexBg)" stroke="url(#goldGrad)" stroke-width="3"/>
+  <text x="32" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-weight="800" font-size="29" fill="url(#goldGrad)">G</text>
+</svg>
