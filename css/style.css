@@ -16,7 +16,7 @@
 
   --max-width: 1140px;
   --radius: 14px;
-  --font-display: "Cinzel", serif;
+  --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
@@ -59,6 +59,10 @@ img { max-width: 100%; }
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
+}
+
+.container.container-wide {
+  max-width: 1600px;
 }
 
 h1, h2, h3 {
@@ -516,31 +520,108 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-weight: 700;
 }
 
-/* ---------- Reviews empty state ---------- */
-.reviews-empty {
-  max-width: 480px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 56px 32px;
-  border: 1px dashed var(--panel-border);
-  border-radius: var(--radius);
-  background: var(--panel);
-}
-.reviews-empty-icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 18px;
-  border-radius: 50%;
+/* ---------- Reviews carousel ---------- */
+.reviews-carousel {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-  color: var(--gold-bright);
-  border: 2px solid var(--gold);
+  gap: 20px;
 }
-.reviews-empty h3 { margin-bottom: 10px; }
-.reviews-empty p { margin-bottom: 24px; }
-.reviews-empty .btn { display: inline-flex; }
+
+.reviews-track-wrap {
+  --cards-visible: 3;
+  overflow: hidden;
+  flex: 1;
+}
+
+.reviews-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.7s ease;
+}
+
+.review-card {
+  flex: 0 0 calc((100% - (var(--cards-visible) - 1) * 24px) / var(--cards-visible));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 44px 32px;
+  min-height: 300px;
+}
+
+.review-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold);
+  margin: 0 auto 22px;
+}
+
+.review-quote {
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 22px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.review-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-bright);
+  margin: 0 0 2px;
+}
+
+.review-role {
+  color: var(--teal);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  color: var(--gold-bright);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.carousel-arrow:hover { border-color: var(--gold); }
+.carousel-arrow:disabled { opacity: 0.3; cursor: default; }
+.carousel-arrow.is-hidden { visibility: hidden; }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+.carousel-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--panel-border);
+  cursor: pointer;
+}
+.carousel-dots button.active { background: var(--gold); }
+.carousel-dots.is-hidden { display: none; }
 
 /* ---------- Contact ---------- */
 .contact-grid {
@@ -650,6 +731,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .pricing-grid { grid-template-columns: 1fr; }
   .price-card.featured.is-visible { transform: none; }
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-track-wrap { --cards-visible: 2; }
 }
 
 @media (max-width: 520px) {
@@ -661,6 +743,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   .stat-bar-inner { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; padding: 20px 16px; }
   .stat-value { font-size: 1.2rem; }
   .contact-grid { grid-template-columns: 1fr; }
+  .reviews-carousel { gap: 8px; }
+  .reviews-track-wrap { --cards-visible: 1; }
+  .review-card { padding: 32px 24px; min-height: 240px; }
+  .carousel-arrow { width: 34px; height: 34px; font-size: 1.2rem; }
   .timeline { padding-left: 24px; }
   .timeline-item::before { left: -31px; }
 }

@@ -71,6 +71,69 @@ const revealObserver = new IntersectionObserver(
 );
 revealEls.forEach((el) => revealObserver.observe(el));
 
+// Reviews carousel — slides one card at a time, adapting to how many fit on screen
+const reviewsTrack = document.getElementById("reviewsTrack");
+if (reviewsTrack) {
+  const cards = Array.from(reviewsTrack.children);
+  const wrapEl = reviewsTrack.parentElement;
+  const prevBtn = document.getElementById("carouselPrev");
+  const nextBtn = document.getElementById("carouselNext");
+  const dotsWrap = document.getElementById("carouselDots");
+  let current = 0;
+  let maxIndex = 0;
+
+  function visibleCount() {
+    return parseInt(getComputedStyle(wrapEl).getPropertyValue("--cards-visible"), 10) || 1;
+  }
+
+  function stepPx() {
+    const trackGap = parseFloat(getComputedStyle(reviewsTrack).gap) || 0;
+    return cards[0].getBoundingClientRect().width + trackGap;
+  }
+
+  function rebuildDots() {
+    dotsWrap.innerHTML = "";
+    for (let i = 0; i <= maxIndex; i++) {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Ir al grupo ${i + 1}`);
+      dot.addEventListener("click", () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+  }
+
+  function render() {
+    reviewsTrack.style.transform = `translateX(-${current * stepPx()}px)`;
+    Array.from(dotsWrap.children).forEach((dot, i) => dot.classList.toggle("active", i === current));
+  }
+
+  function goTo(index) {
+    current = (index + maxIndex + 1) % (maxIndex + 1);
+    render();
+  }
+
+  function recalc() {
+    const newMaxIndex = Math.max(0, cards.length - visibleCount());
+    if (newMaxIndex !== maxIndex) {
+      maxIndex = newMaxIndex;
+      current = Math.min(current, maxIndex);
+      rebuildDots();
+    }
+    const hideNav = maxIndex === 0;
+    prevBtn.classList.toggle("is-hidden", hideNav);
+    nextBtn.classList.toggle("is-hidden", hideNav);
+    dotsWrap.classList.toggle("is-hidden", hideNav);
+    render();
+  }
+
+  prevBtn.addEventListener("click", () => goTo(current - 1));
+  nextBtn.addEventListener("click", () => goTo(current + 1));
+
+  window.addEventListener("resize", () => { recalc(); });
+
+  recalc();
+}
+
 // Copy Discord username to clipboard
 const discordCopy = document.getElementById("discordCopy");
 if (discordCopy) {
