@@ -17,6 +17,15 @@ nav.querySelectorAll("a").forEach((link) => {
   });
 });
 
+// Back to top (logo/brand link) — anchoring to the sticky header itself doesn't
+// reliably scroll in every browser, so force it via JS instead
+document.querySelectorAll('a[href="#top"]').forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
+
 // Scroll progress bar
 const scrollProgress = document.getElementById("scrollProgress");
 let progressTicking = false;
