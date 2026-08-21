@@ -105,7 +105,10 @@ if (reviewsTrack) {
     for (let i = 0; i <= maxIndex; i++) {
       const dot = document.createElement("button");
       dot.type = "button";
-      dot.setAttribute("aria-label", `Ir al grupo ${i + 1}`);
+      const label = (window.GRX && window.GRX.t)
+        ? window.GRX.t("reviews.dot", { n: i + 1 })
+        : `Ir al grupo ${i + 1}`;
+      dot.setAttribute("aria-label", label);
       dot.addEventListener("click", () => goTo(i));
       dotsWrap.appendChild(dot);
     }
@@ -139,6 +142,7 @@ if (reviewsTrack) {
   nextBtn.addEventListener("click", () => goTo(current + 1));
 
   window.addEventListener("resize", () => { recalc(); });
+  window.addEventListener("grx:langchange", () => { rebuildDots(); render(); });
 
   recalc();
 }

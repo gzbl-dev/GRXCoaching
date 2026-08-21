@@ -15,6 +15,31 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script>
+(function () {
+  var KEY = "grx-lang";
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch (e) {}
+  var lang = "es";
+  if (saved === "en" || saved === "es") {
+    lang = saved;
+  } else {
+    var list = (navigator.languages && navigator.languages.length)
+      ? navigator.languages
+      : [navigator.language || navigator.userLanguage];
+    for (var i = 0; i < list.length; i++) {
+      var code = String(list[i] || "").toLowerCase().slice(0, 2);
+      if (code === "en") { lang = "en"; break; }
+      if (code === "es") { lang = "es"; break; }
+    }
+  }
+  document.documentElement.lang = lang;
+  document.documentElement.setAttribute("data-lang", lang);
+})();
+</script>
+<noscript>
+  <style>html[data-lang="en"] body { visibility: visible !important; }</style>
+</noscript>
 </head>
 <body>
 
@@ -29,16 +54,21 @@
     </a>
 
     <nav class="nav" id="nav">
-      <a href="#sobre-mi">Sobre mí</a>
-      <a href="#trayectoria">Trayectoria</a>
-      <a href="#packs">Packs</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a>
+      <a href="#trayectoria" data-i18n="nav.career">Trayectoria</a>
+      <a href="#packs" data-i18n="nav.packs">Packs</a>
+      <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
     </nav>
 
-    <a href="#packs" class="btn btn-primary btn-nav">Reserva tu sesión</a>
+    <a href="#packs" class="btn btn-primary btn-nav" data-i18n="cta.book">Reserva tu sesión</a>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+    <div class="lang-switch" role="group" data-i18n="lang.label" data-i18n-attr="aria-label" aria-label="Idioma">
+      <button type="button" class="lang-btn" data-set-lang="es" aria-pressed="true">ES</button>
+      <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" data-i18n="nav.open" data-i18n-attr="aria-label" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -49,16 +79,16 @@
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-text">
-        <p class="eyebrow">Mejora tu gameplay - Alcanza tu máximo potencial</p>
-        <h1>Sube elo con un jungla con experiencia</h1>
-        <p class="hero-lead">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Mejora tu gameplay - Alcanza tu máximo potencial</p>
+        <h1 data-i18n="hero.title">Sube elo con un jungla con experiencia</h1>
+        <p class="hero-lead" data-i18n="hero.lead" data-i18n-html>
           Soy Gonzalo <strong>“GRX”</strong>, jugador asiduo de alto nivel. Coacheo desde mi propia experiencia
-          jugando SoloQ cada día, aplicando lo aprendido en la escena competitiva, no hace falta un manual ni aprender la teoría completa. 
+          jugando SoloQ cada día, aplicando lo aprendido en la escena competitiva, no hace falta un manual ni aprender la teoría completa.
           Me adapto a cualquier situación.
         </p>
         <div class="hero-actions">
-          <a href="#packs" class="btn btn-primary">Reserva tu sesión</a>
-          <a href="https://lol.fandom.com/wiki/GRX" target="_blank" rel="noopener" class="btn btn-ghost">Mi Leaguepedia ↗</a>
+          <a href="#packs" class="btn btn-primary" data-i18n="cta.book">Reserva tu sesión</a>
+          <a href="https://lol.fandom.com/wiki/GRX" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="hero.leaguepedia">Mi Leaguepedia ↗</a>
         </div>
       </div>
 
@@ -75,19 +105,19 @@
       <div class="container stat-bar-inner">
         <div class="stat">
           <span class="stat-value">+1300 LPS</span>
-          <span class="stat-label">Rango actual</span>
+          <span class="stat-label" data-i18n="stats.rank">Rango actual</span>
         </div>
         <div class="stat">
-          <span class="stat-value">+4 años</span>
-          <span class="stat-label">Experiencia</span>
+          <span class="stat-value" data-i18n="stats.yearsValue">+4 años</span>
+          <span class="stat-label" data-i18n="stats.experience">Experiencia</span>
         </div>
         <div class="stat">
           <span class="stat-value">~600</span>
-          <span class="stat-label">Peak Rank Europa</span>
+          <span class="stat-label" data-i18n="stats.peak">Peak Rank Europa</span>
         </div>
         <div class="stat">
           <span class="stat-value">+300h</span>
-          <span class="stat-label">de coaching</span>
+          <span class="stat-label" data-i18n="stats.coaching">de coaching</span>
         </div>
       </div>
     </div>
@@ -97,24 +127,24 @@
   <section id="sobre-mi" class="section reveal">
     <div class="container about-grid">
       <div class="about-avatar">
-        <img class="about-avatar-inner" src="assets/about-portrait.png" alt="Gromix con la camiseta de UCAM Universidad Esports">
+        <img class="about-avatar-inner" src="assets/about-portrait.png" data-i18n="about.photoAlt" data-i18n-attr="alt" alt="Gromix con la camiseta de UCAM Universidad Esports">
       </div>
       <div class="about-text">
-        <p class="section-eyebrow">Sobre mí</p>
-        <h2>De UCAM Esports al coaching individual</h2>
-        <p>
+        <p class="section-eyebrow" data-i18n="about.eyebrow">Sobre mí</p>
+        <h2 data-i18n="about.title">De UCAM Esports al coaching individual</h2>
+        <p data-i18n="about.p1" data-i18n-html>
           Empecé mi carrera competitiva en 2022 en la cantera de <strong>UCAM Esports Academy</strong>, compaginando la competición con mis estudios,
           en 2023 di el salto de suplente al primer equipo en <strong>Superliga</strong>. Desde entonces he competido
           con <strong>UCAM University Esports</strong>, <strong>Tan'i eSports</strong> y <strong>Oxygen Gaming</strong>,
           y soy <strong>tricampeón de la Liga Universitaria Española de League of Legends</strong>
           con UCAM University.
         </p>
-        <p>
+        <p data-i18n="about.p2" data-i18n-html>
           Actualmente soy <strong>Rank 2000 de EUW </strong>en soloQ (peak +1350 LP) y quiero ayudarte a entender la jungla
           como se juega a nivel competitivo: pathing, lectura de mapa, control de objetivos, matchups y
           toma de decisiones en early/mid game. Nada de teoría genérica - trabajamos sobre tus propias partidas.
         </p>
-        <a href="https://x.com/gromix_lol" target="_blank" rel="noopener" class="link-inline">Sígueme en X ↗</a>
+        <a href="https://x.com/gromix_lol" target="_blank" rel="noopener" class="link-inline" data-i18n="about.twitter">Sígueme en X ↗</a>
       </div>
     </div>
   </section>
@@ -122,45 +152,45 @@
   <!-- TRAYECTORIA -->
   <section id="trayectoria" class="section section-alt reveal">
     <div class="container">
-      <p class="section-eyebrow center">Trayectoria</p>
-      <h2 class="center">Mi carrera competitiva</h2>
+      <p class="section-eyebrow center" data-i18n="career.eyebrow">Trayectoria</p>
+      <h2 class="center" data-i18n="career.title">Mi carrera competitiva</h2>
 
-      <img class="trayectoria-banner" src="assets/trayectoria-banner.jpg" alt="Gromix y UCAM Universidad Esports celebrando un título">
+      <img class="trayectoria-banner" src="assets/trayectoria-banner.jpg" data-i18n="career.bannerAlt" data-i18n-attr="alt" alt="Gromix y UCAM Universidad Esports celebrando un título">
 
       <div class="timeline">
         <div class="timeline-item highlight reveal">
           <span class="timeline-year">2026</span>
           <div class="timeline-body">
-            <h3>Tricampeón Liga Universitaria · Top 3 Circuito Tormenta</h3>
-            <p>Tercer título de la Liga Universitaria Española con UCAM University, además de un top 3 en el Circuito Tormenta, y empiezo a compaginarlo con coaching individual.</p>
+            <h3 data-i18n="career.2026.title">Tricampeón Liga Universitaria · Top 3 Circuito Tormenta</h3>
+            <p data-i18n="career.2026.body">Tercer título de la Liga Universitaria Española con UCAM University, además de un top 3 en el Circuito Tormenta, y empiezo a compaginarlo con coaching individual.</p>
           </div>
         </div>
         <div class="timeline-item reveal">
           <span class="timeline-year">2025</span>
           <div class="timeline-body">
             <h3>UCAM · Tan'i eSports · Oxygen Gaming</h3>
-            <p>Competición activa en distintos proyectos de la escena española, segunda división e iberian cup.</p>
+            <p data-i18n="career.2025.body">Competición activa en distintos proyectos de la escena española, segunda división e iberian cup.</p>
           </div>
         </div>
         <div class="timeline-item highlight reveal">
           <span class="timeline-year">2024</span>
           <div class="timeline-body">
-            <h3>Bicampeón Liga Universitaria Española</h3>
-            <p>Título con UCAM University - segundo año consecutivo del club como campeón universitario a nivel nacional.</p>
+            <h3 data-i18n="career.2024.title">Bicampeón Liga Universitaria Española</h3>
+            <p data-i18n="career.2024.body">Título con UCAM University - segundo año consecutivo del club como campeón universitario a nivel nacional.</p>
           </div>
         </div>
         <div class="timeline-item reveal">
           <span class="timeline-year">2023</span>
           <div class="timeline-body">
             <h3>UCAM Esports - Superliga</h3>
-            <p>Aprendiendo junto al primer equipo de UCAM Esports, supliendo en la máxima categoría nacional.</p>
+            <p data-i18n="career.2023.body">Aprendiendo junto al primer equipo de UCAM Esports, supliendo en la máxima categoría nacional.</p>
           </div>
         </div>
         <div class="timeline-item reveal">
           <span class="timeline-year">2022</span>
           <div class="timeline-body">
             <h3>UCAM Esports Academy</h3>
-            <p>Debut en la cantera de UCAM, jugando de jungla en la estructura académica del club.</p>
+            <p data-i18n="career.2022.body">Debut en la cantera de UCAM, jugando de jungla en la estructura académica del club.</p>
           </div>
         </div>
       </div>
@@ -170,52 +200,52 @@
   <!-- PACKS -->
   <section id="packs" class="section reveal">
     <div class="container">
-      <p class="section-eyebrow center">Packs de coaching</p>
-      <h2 class="center">¿Listo para subir de elo?</h2>
-      <p class="section-lead center">
+      <p class="section-eyebrow center" data-i18n="packs.eyebrow">Packs de coaching</p>
+      <h2 class="center" data-i18n="packs.title">¿Listo para subir de elo?</h2>
+      <p class="section-lead center" data-i18n="packs.lead">
         Sesiones individuales 1 a 1, centradas en tus partidas: VOD review,
         pathing de jungla, macro y toma de decisiones.
       </p>
 
       <div class="pricing-grid">
         <div class="price-card reveal">
-          <h3>Sesión individual</h3>
-          <p class="price"><span class="amount">15€</span><span class="per">/ sesión</span></p>
-          <p class="price-note">Ideal para probar y resolver dudas puntuales</p>
+          <h3 data-i18n="packs.single.title">Sesión individual</h3>
+          <p class="price"><span class="amount">15€</span><span class="per" data-i18n="packs.perSession">/ sesión</span></p>
+          <p class="price-note" data-i18n="packs.single.note">Ideal para probar y resolver dudas puntuales</p>
           <ul class="price-features">
-            <li>Review de VOD/replay</li>
-            <li>Análisis de pathing y objetivos</li>
-            <li>Feedback de matchups</li>
+            <li data-i18n="packs.single.f1">Review de VOD/replay</li>
+            <li data-i18n="packs.single.f2">Análisis de pathing y objetivos</li>
+            <li data-i18n="packs.single.f3">Feedback de matchups</li>
             <li>~60-90 min</li>
           </ul>
-          <a href="#contacto" class="btn btn-outline">Reservar</a>
+          <a href="#contacto" class="btn btn-outline" data-i18n="packs.book">Reservar</a>
         </div>
 
         <div class="price-card featured reveal">
-          <span class="badge">MÁS POPULAR</span>
-          <h3>Pack 3 sesiones</h3>
-          <p class="price"><span class="amount">40€</span><span class="per">/ pack</span></p>
-          <p class="price-note">13,3€ por sesión · ahorras 11%</p>
+          <span class="badge" data-i18n="packs.popular">MÁS POPULAR</span>
+          <h3 data-i18n="packs.3.title">Pack 3 sesiones</h3>
+          <p class="price"><span class="amount">40€</span><span class="per" data-i18n="packs.perPack">/ pack</span></p>
+          <p class="price-note" data-i18n="packs.3.note">13,3€ por sesión · ahorras 11%</p>
           <ul class="price-features">
-            <li>Todo lo del pack suelto</li>
-            <li>Seguimiento de progresión entre sesiones</li>
-            <li>Plan de mejora personalizado</li>
+            <li data-i18n="packs.3.f1">Todo lo del pack suelto</li>
+            <li data-i18n="packs.3.f2">Seguimiento de progresión entre sesiones</li>
+            <li data-i18n="packs.3.f3">Plan de mejora personalizado</li>
             <li>~60-90 min</li>
           </ul>
-          <a href="#contacto" class="btn btn-primary">Reservar</a>
+          <a href="#contacto" class="btn btn-primary" data-i18n="packs.book">Reservar</a>
         </div>
 
         <div class="price-card reveal">
-          <h3>Pack 5 sesiones</h3>
-          <p class="price"><span class="amount">60€</span><span class="per">/ pack</span></p>
-          <p class="price-note">12€ por sesión · ahorras 20%</p>
+          <h3 data-i18n="packs.5.title">Pack 5 sesiones</h3>
+          <p class="price"><span class="amount">60€</span><span class="per" data-i18n="packs.perPack">/ pack</span></p>
+          <p class="price-note" data-i18n="packs.5.note">12€ por sesión · ahorras 20%</p>
           <ul class="price-features">
-            <li>Todo lo del pack de 3 sesiones</li>
-            <li>Mejora sostenida a medio plazo</li>
-            <li>Mejor precio por sesión</li>
+            <li data-i18n="packs.5.f1">Todo lo del pack de 3 sesiones</li>
+            <li data-i18n="packs.5.f2">Mejora sostenida a medio plazo</li>
+            <li data-i18n="packs.5.f3">Mejor precio por sesión</li>
             <li>~60-90 min</li>
           </ul>
-          <a href="#contacto" class="btn btn-outline">Reservar</a>
+          <a href="#contacto" class="btn btn-outline" data-i18n="packs.book">Reservar</a>
         </div>
       </div>
     </div>
@@ -224,49 +254,49 @@
   <!-- REVIEWS -->
   <section id="reviews" class="section section-alt reveal">
     <div class="container container-wide">
-      <p class="section-eyebrow center">Reviews</p>
-      <h2 class="center">Lo que dicen mis alumnos</h2>
+      <p class="section-eyebrow center" data-i18n="reviews.eyebrow">Reviews</p>
+      <h2 class="center" data-i18n="reviews.title">Lo que dicen mis alumnos</h2>
 
       <div class="reviews-carousel">
-        <button class="carousel-arrow prev" id="carouselPrev" aria-label="Review anterior">‹</button>
+        <button class="carousel-arrow prev" id="carouselPrev" data-i18n="reviews.prev" data-i18n-attr="aria-label" aria-label="Review anterior">‹</button>
 
         <div class="reviews-track-wrap">
           <div class="reviews-track" id="reviewsTrack">
             <article class="review-card">
               <img class="review-avatar" src="assets/review-simpy.webp" alt="Simpy">
-              <p class="review-quote">Conozco a Gonzalo de la escena competitiva, sus sesiones van directas al grano, sin teoría vacía. Si de verdad quieres entender cómo se juega este rol a un nivel decente, GRX es el coach indicado.</p>
+              <p class="review-quote" data-i18n="reviews.simpy">Conozco a Gonzalo de la escena competitiva, sus sesiones van directas al grano, sin teoría vacía. Si de verdad quieres entender cómo se juega este rol a un nivel decente, GRX es el coach indicado.</p>
               <p class="review-name">Simpy</p>
-              <p class="review-role">Pro</p>
+              <p class="review-role" data-i18n="reviews.role.pro">Pro</p>
             </article>
             <article class="review-card">
               <img class="review-avatar" src="assets/review-quevedo.jpg" alt="Quevedo">
-              <p class="review-quote">Gonzalo me ha ayudado muchísimo a corregir mis errores de macro y a no tiltearme en mis partidas. Te explica el control de objetivos y la toma de decisiones de una forma súper clara. Es cercano y profesional</p>
+              <p class="review-quote" data-i18n="reviews.quevedo">Gonzalo me ha ayudado muchísimo a corregir mis errores de macro y a no tiltearme en mis partidas. Te explica el control de objetivos y la toma de decisiones de una forma súper clara. Es cercano y profesional</p>
               <p class="review-name">Quevedo</p>
-              <p class="review-role">Streamer</p>
+              <p class="review-role" data-i18n="reviews.role.streamer">Streamer</p>
             </article>
             <article class="review-card">
               <img class="review-avatar" src="assets/review-polak09.jpg" alt="Polak09">
-              <p class="review-quote">Mejor de lo que me esperaba. Te da una visión del juego diferente a lo que los coach normales te dicen. Es realista y aplicable a las partidas.</p>
+              <p class="review-quote" data-i18n="reviews.polak">Mejor de lo que me esperaba. Te da una visión del juego diferente a lo que los coach normales te dicen. Es realista y aplicable a las partidas.</p>
               <p class="review-name">Polak09</p>
-              <p class="review-role">Alumno</p>
+              <p class="review-role" data-i18n="reviews.role.student">Alumno</p>
             </article>
             <article class="review-card">
               <img class="review-avatar" src="assets/review-irfs.png" alt="Irfs">
-              <p class="review-quote">He compartido equipo con Gonzalo y, más allá de la experiencia competitiva, lo que de verdad le hace buen coach es la cantidad de horas que le mete a SoloQ.
+              <p class="review-quote" data-i18n="reviews.irfs">He compartido equipo con Gonzalo y, más allá de la experiencia competitiva, lo que de verdad le hace buen coach es la cantidad de horas que le mete a SoloQ.
 No te va a vender humo con teorías súper complejas, te enseña de forma práctica a leer el mapa, castigar los errores del rival y tomar buenas decisiones en la jungla.</p>
               <p class="review-name">Irfs</p>
               <p class="review-role">Pro & ADC Coach</p>
             </article>
             <article class="review-card">
               <img class="review-avatar" src="assets/review-sora.jpg" alt="Sora">
-              <p class="review-quote">Entré pensando que necesitaba mejorar mecánicas y acabé entendiendo que el problema era cómo tomaba decisiones. Gonzalo te explica el porqué de cada jugada y, sobre todo, te enseña a pensar por tu cuenta. Después de unas sesiones noté muchísimo la diferencia.</p>
+              <p class="review-quote" data-i18n="reviews.sora">Entré pensando que necesitaba mejorar mecánicas y acabé entendiendo que el problema era cómo tomaba decisiones. Gonzalo te explica el porqué de cada jugada y, sobre todo, te enseña a pensar por tu cuenta. Después de unas sesiones noté muchísimo la diferencia.</p>
               <p class="review-name">Sora</p>
-              <p class="review-role">Pro</p>
+              <p class="review-role" data-i18n="reviews.role.pro">Pro</p>
             </article>
           </div>
         </div>
 
-        <button class="carousel-arrow next" id="carouselNext" aria-label="Review siguiente">›</button>
+        <button class="carousel-arrow next" id="carouselNext" data-i18n="reviews.next" data-i18n-attr="aria-label" aria-label="Review siguiente">›</button>
       </div>
       <div class="carousel-dots" id="carouselDots"></div>
     </div>
@@ -275,9 +305,9 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
   <!-- CONTACTO -->
   <section id="contacto" class="section reveal">
     <div class="container">
-      <p class="section-eyebrow center">Contacto</p>
-      <h2 class="center">¿Hablamos?</h2>
-      <p class="section-lead center">Escríbeme por el canal que prefieras y cuadramos tu sesión.</p>
+      <p class="section-eyebrow center" data-i18n="contact.eyebrow">Contacto</p>
+      <h2 class="center" data-i18n="contact.title">¿Hablamos?</h2>
+      <p class="section-lead center" data-i18n="contact.lead">Escríbeme por el canal que prefieras y cuadramos tu sesión.</p>
 
       <div class="contact-grid">
         <button class="contact-card reveal" id="discordCopy" type="button" data-value="gromixlol">
@@ -286,7 +316,7 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
           </span>
           <span class="contact-label">Discord</span>
           <span class="contact-value">gromixlol</span>
-          <span class="contact-hint" data-default="Copiar" data-copied="¡Copiado!">Copiar</span>
+          <span class="contact-hint" data-i18n="contact.copy" data-i18n-copied="contact.copied" data-default="Copiar" data-copied="¡Copiado!">Copiar</span>
         </button>
 
         <a class="contact-card reveal" href="mailto:gzlbernal@gmail.com">
@@ -295,7 +325,7 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
           </span>
           <span class="contact-label">Email</span>
           <span class="contact-value">gzlbernal@gmail.com</span>
-          <span class="contact-hint">Escribir</span>
+          <span class="contact-hint" data-i18n="contact.write">Escribir</span>
         </a>
 
         <a class="contact-card reveal" href="https://x.com/gromix_lol" target="_blank" rel="noopener">
@@ -304,7 +334,7 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
           </span>
           <span class="contact-label">X (Twitter)</span>
           <span class="contact-value">@gromix_lol</span>
-          <span class="contact-hint">Seguir</span>
+          <span class="contact-hint" data-i18n="contact.follow">Seguir</span>
         </a>
 
         <a class="contact-card reveal" href="https://lolpros.gg/player/gromix" target="_blank" rel="noopener">
@@ -312,8 +342,8 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
             <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M4 20V10h3v10H4Zm6.5 0V4h3v16h-3ZM17 20v-7h3v7h-3Z"/></svg>
           </span>
           <span class="contact-label">LoLPros</span>
-          <span class="contact-value">Ver perfil</span>
-          <span class="contact-hint">Abrir ↗</span>
+          <span class="contact-value" data-i18n="contact.profile">Ver perfil</span>
+          <span class="contact-hint" data-i18n="contact.open">Abrir ↗</span>
         </a>
       </div>
     </div>
@@ -330,6 +360,7 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
   </div>
 </footer>
 
+<script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
