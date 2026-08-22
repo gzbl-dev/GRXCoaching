@@ -146,21 +146,3 @@ if (reviewsTrack) {
 
   recalc();
 }
-
-// Copy Discord username to clipboard
-const discordCopy = document.getElementById("discordCopy");
-if (discordCopy) {
-  const hint = discordCopy.querySelector(".contact-hint");
-  discordCopy.addEventListener("click", async () => {
-    const value = discordCopy.dataset.value;
-    try {
-      await navigator.clipboard.writeText(value);
-    } catch (err) {
-      // Clipboard API unavailable — fall back silently, user can still read/select the value.
-    }
-    hint.textContent = hint.dataset.copied;
-    setTimeout(() => {
-      hint.textContent = hint.dataset.default;
-    }, 1800);
-  });
-}
