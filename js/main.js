@@ -1,5 +1,6 @@
 // Year in footer
-document.getElementById("year").textContent = new Date().getFullYear();
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Mobile nav toggle
 const navToggle = document.getElementById("navToggle");
@@ -19,10 +20,16 @@ nav.querySelectorAll("a").forEach((link) => {
 
 // Back to top (logo/brand link) — anchoring to the sticky header itself doesn't
 // reliably scroll in every browser, so force it via JS instead
+// Defensivo: si matchMedia no existe, damos por hecho que no hay preferencia y
+// seguimos. Antes, un fallo aqui tumbaba todo el resto del fichero (carrusel incluido).
+const reducedMotion = typeof window.matchMedia === "function"
+  ? window.matchMedia("(prefers-reduced-motion: reduce)")
+  : { matches: false };
+
 document.querySelectorAll('a[href="#top"]').forEach((link) => {
   link.addEventListener("click", (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? "auto" : "smooth" });
   });
 });
 
@@ -47,10 +54,14 @@ window.addEventListener("scroll", () => {
 updateScrollProgress();
 
 // Active nav link while scrolling
+// Todo lo que sigue es decorativo. Si IntersectionObserver falla o no existe,
+// degradamos en vez de reventar: lo importante (packs, carrusel, contacto) va detras.
+const hasObserver = typeof IntersectionObserver === "function";
+
 const sections = document.querySelectorAll("main section[id]");
 const navLinks = document.querySelectorAll(".nav a");
 
-const activeSectionObserver = new IntersectionObserver(
+const activeSectionObserver = hasObserver && new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -63,11 +74,15 @@ const activeSectionObserver = new IntersectionObserver(
   },
   { rootMargin: "-45% 0px -50% 0px" }
 );
-sections.forEach((section) => activeSectionObserver.observe(section));
+if (activeSectionObserver) sections.forEach((section) => activeSectionObserver.observe(section));
 
 // Reveal-on-scroll
 const revealEls = document.querySelectorAll(".reveal");
-const revealObserver = new IntersectionObserver(
+if (reducedMotion.matches || !hasObserver) {
+  // Sin animacion de entrada: mostramos todo de una, nada de esperar al scroll.
+  revealEls.forEach((el) => el.classList.add("is-visible"));
+}
+const revealObserver = hasObserver && new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -78,7 +93,7 @@ const revealObserver = new IntersectionObserver(
   },
   { threshold: 0.15 }
 );
-revealEls.forEach((el) => revealObserver.observe(el));
+if (revealObserver) revealEls.forEach((el) => revealObserver.observe(el));
 
 // Reviews carousel — slides one card at a time, adapting to how many fit on screen
 const reviewsTrack = document.getElementById("reviewsTrack");
@@ -141,8 +156,98 @@ if (reviewsTrack) {
   prevBtn.addEventListener("click", () => goTo(current - 1));
   nextBtn.addEventListener("click", () => goTo(current + 1));
 
-  window.addEventListener("resize", () => { recalc(); });
+  // Flechas de teclado cuando el carrusel tiene el foco
+  wrapEl.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); goTo(current - 1); }
+    else if (e.key === "ArrowRight") { e.preventDefault(); goTo(current + 1); }
+  });
+
+  // Arrastrar / deslizar. La mayoria del trafico llega de Discord y X, o sea movil,
+  // donde el gesto natural es deslizar la tarjeta, no buscar la flechita.
+  let dragX = 0, dragY = 0, dragging = false, decided = false, horizontal = false;
+
+  function dragStart(x, y) { dragX = x; dragY = y; dragging = true; decided = false; horizontal = false; }
+
+  function dragMove(x, y, e) {
+    if (!dragging) return;
+    const dx = x - dragX;
+    const dy = y - dragY;
+    if (!decided && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+      decided = true;
+      horizontal = Math.abs(dx) > Math.abs(dy);
+    }
+    // Si el gesto es horizontal, es nuestro: cortamos el scroll vertical de la pagina.
+    if (decided && horizontal && e.cancelable) e.preventDefault();
+  }
+
+  function dragEnd(x) {
+    if (!dragging) return;
+    const dx = x - dragX;
+    dragging = false;
+    if (horizontal && Math.abs(dx) > 45) goTo(dx < 0 ? current + 1 : current - 1);
+  }
+
+  wrapEl.addEventListener("touchstart", (e) => dragStart(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+  wrapEl.addEventListener("touchmove", (e) => dragMove(e.touches[0].clientX, e.touches[0].clientY, e), { passive: false });
+  wrapEl.addEventListener("touchend", (e) => dragEnd(e.changedTouches[0].clientX));
+  wrapEl.addEventListener("touchcancel", () => { dragging = false; });
+
+  wrapEl.addEventListener("mousedown", (e) => { dragStart(e.clientX, e.clientY); });
+  window.addEventListener("mousemove", (e) => dragMove(e.clientX, e.clientY, e));
+  window.addEventListener("mouseup", (e) => dragEnd(e.clientX));
+  wrapEl.addEventListener("dragstart", (e) => e.preventDefault());
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(recalc, 120);
+  });
   window.addEventListener("grx:langchange", () => { rebuildDots(); render(); });
 
   recalc();
 }
+
+// FAQ: se despliega con animacion y solo queda abierta una pregunta a la vez
+const faqItems = document.querySelectorAll(".faq-item");
+const canAnimate = typeof Element.prototype.animate === "function";
+
+function animateFaq(item, opening) {
+  const body = item.querySelector(".faq-body");
+  if (item._faqAnim) item._faqAnim.cancel();
+
+  item.classList.toggle("is-open", opening);
+  if (opening) item.open = true;
+
+  if (!body || !canAnimate || reducedMotion.matches) {
+    item.open = opening;
+    return;
+  }
+
+  const full = body.scrollHeight + "px";
+  const anim = body.animate(
+    opening
+      ? [{ height: "0px", opacity: 0 }, { height: full, opacity: 1 }]
+      : [{ height: full, opacity: 1 }, { height: "0px", opacity: 0 }],
+    { duration: 300, easing: "cubic-bezier(0.4, 0, 0.2, 1)" }
+  );
+  item._faqAnim = anim;
+  anim.onfinish = () => {
+    item._faqAnim = null;
+    if (!opening) item.open = false;
+  };
+}
+
+faqItems.forEach((item) => {
+  const summary = item.querySelector("summary");
+  if (!summary) return;
+  summary.addEventListener("click", (e) => {
+    e.preventDefault();
+    const opening = !item.classList.contains("is-open");
+    if (opening) {
+      faqItems.forEach((other) => {
+        if (other !== item && other.classList.contains("is-open")) animateFaq(other, false);
+      });
+    }
+    animateFaq(item, opening);
+  });
+});

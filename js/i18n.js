@@ -39,7 +39,7 @@ const translations = {
     "career.2022.body": "Debut en la cantera de UCAM, jugando de jungla en la estructura académica del club.",
     "packs.eyebrow": "Packs de coaching",
     "packs.title": "¿Listo para subir de elo?",
-    "packs.lead": "Sesiones individuales 1 a 1, centradas en tus partidas: VOD review, pathing de jungla, macro y toma de decisiones.",
+    "packs.lead": "Sesiones personalizadas, individuales o en equipo, centradas en tus partidas: VOD review, pathing de jungla, macro y toma de decisiones.",
     "packs.perSession": "/ sesión",
     "packs.perPack": "/ pack",
     "packs.book": "Reservar",
@@ -59,6 +59,40 @@ const translations = {
     "packs.5.f1": "Todo lo del pack de 3 sesiones",
     "packs.5.f2": "Mejora sostenida a medio plazo",
     "packs.5.f3": "Mejor precio por sesión",
+    "packs.from": "Desde",
+    "packs.team.title": "Sesión de equipo",
+    "packs.team.note": "Para equipos de flex o 5 man",
+    "packs.team.f1": "VOD review del equipo",
+    "packs.team.f2": "Análisis de comunicación y macro",
+    "packs.team.f3": "Estrategias de draft",
+    "packs.team.f4": "Plan de mejora grupal",
+    "packs.team.cta": "El precio depende del equipo y del formato. Escríbeme y lo cuadramos.",
+    "packs.team.book": "Háblame",
+    "nav.process": "Cómo funciona",
+    "nav.faq": "FAQ",
+    "process.eyebrow": "Cómo funciona",
+    "process.title": "De escribirme a tu primera sesión",
+    "process.lead": "Sin formularios largos ni intermediarios. Tres pasos y estamos dentro.",
+    "process.s1.title": "Escríbeme",
+    "process.s1.body": "Por Discord, correo o Twitter. Cuéntame tus objetivos, tu elo actual y qué crees que te está frenando.",
+    "process.s2.title": "Cuadramos día y hora",
+    "process.s2.body": "Te paso los huecos que tenga y eliges el pack que mejor se adapte a ti, sin ningún compromiso.",
+    "process.s3.title": "Sesión 1 a 1",
+    "process.s3.body": "De 60 a 90 minutos compartiendo pantalla: tus errores y cómo decidiría en tu lugar un jugador competitivo.",
+    "process.bring": "<strong>Qué traer:</strong> una partida reciente (replay o tu perfil de op.gg) y ganas de que te señalen lo que estás haciendo mal.",
+    "faq.eyebrow": "Preguntas frecuentes",
+    "faq.title": "Dudas antes de reservar",
+    "faq.q1": "¿Necesito un rango mínimo para que me sirva?",
+    "faq.a1": "No. Trabajo sobre tus partidas y tu nivel, así que el contenido cambia según dónde estés. Lo único que hace falta es que juegues con cierta regularidad para poder aplicar lo que veamos.",
+    "faq.q2": "¿Cómo es una sesión por dentro?",
+    "faq.a2": "Por Discord con pantalla compartida, entre 60 y 90 minutos. Revisamos partidas tuyas reales: pathing, decisiones en early y mid, control de objetivos y los errores que se repiten. Nada de teoría genérica que no puedas aplicar mañana.",
+    "faq.q3": "¿Solo coacheas jungla?",
+    "faq.a3": "La jungla es mi rol y donde más valor te puedo dar. Dicho eso, buena parte de lo que trabajamos (lectura de mapa, macro, control de objetivos y toma de decisiones) se aplica a cualquier línea. Si juegas otro rol, escríbeme y te digo con sinceridad si te compensa.",
+    "faq.q4": "¿En qué idioma damos la sesión?",
+    "faq.a4": "Español o inglés, el que prefieras. Dilo al escribirme.",
+    "faq.q6": "¿Y si no puedo asistir a la hora acordada?",
+    "faq.a6": "Avísame con antelación y la movemos sin problema. Entiendo que a veces surgen cosas.",
+    "contact.mailto": "mailto:gzlbernal@gmail.com?subject=Reserva%20de%20sesi%C3%B3n%20-%20GRX%20Coaching&body=Hola%20Gonzalo%3A%0A%0A-%20Rango%20actual%3A%0A-%20Objetivo%3A%0A-%20Campeones%20que%20juego%3A%0A-%20Pack%20que%20me%20interesa%3A%0A-%20Disponibilidad%20%28dias%20y%20horas%29%3A%0A-%20Mi%20op.gg%20o%20replay%3A%0A%0AGracias%21%0A",
     "reviews.eyebrow": "Reviews",
     "reviews.title": "Lo que dicen mis alumnos",
     "reviews.prev": "Review anterior",
@@ -74,7 +108,7 @@ const translations = {
     "reviews.sora": "Entré pensando que necesitaba mejorar mecánicas y acabé entendiendo que el problema era cómo tomaba decisiones. Gonzalo te explica el porqué de cada jugada y, sobre todo, te enseña a pensar por tu cuenta. Después de unas sesiones noté muchísimo la diferencia.",
     "contact.eyebrow": "Contacto",
     "contact.title": "¿Hablamos?",
-    "contact.lead": "Entra al servidor de Discord o escríbeme por el canal que prefieras y cuadramos tu sesión.",
+    "contact.lead": "Escríbeme por privado en Discord a <strong>gromixlol</strong> o entra en mi servidor y cuadramos tu sesión.",
     "contact.server": "Servidor",
     "contact.join": "Unirse ↗",
     "contact.write": "Escribir",
@@ -118,7 +152,7 @@ const translations = {
     "career.2022.body": "Debut in UCAM's academy, playing jungle in the club's academic structure.",
     "packs.eyebrow": "Coaching packs",
     "packs.title": "Ready to climb elo?",
-    "packs.lead": "1-on-1 sessions focused on your games: VOD review, jungle pathing, macro and decision-making.",
+    "packs.lead": "Personalized sessions, solo or as a team, focused on your games: VOD review, jungle pathing, macro and decision-making.",
     "packs.perSession": "/ session",
     "packs.perPack": "/ pack",
     "packs.book": "Book",
@@ -138,6 +172,40 @@ const translations = {
     "packs.5.f1": "Everything in the 3-session pack",
     "packs.5.f2": "Sustained mid-term improvement",
     "packs.5.f3": "Best price per session",
+    "packs.from": "From",
+    "packs.team.title": "Team session",
+    "packs.team.note": "For flex or 5-man teams",
+    "packs.team.f1": "Team VOD review",
+    "packs.team.f2": "Communication and macro analysis",
+    "packs.team.f3": "Draft strategies",
+    "packs.team.f4": "Group improvement plan",
+    "packs.team.cta": "Price depends on the team and format. Message me and we will sort it out.",
+    "packs.team.book": "Message me",
+    "nav.process": "How it works",
+    "nav.faq": "FAQ",
+    "process.eyebrow": "How it works",
+    "process.title": "From first message to your first session",
+    "process.lead": "No long forms, no middlemen. Three steps and we are in.",
+    "process.s1.title": "Message me",
+    "process.s1.body": "On Discord, email or Twitter. Tell me your goals, your current rank and what you think is holding you back.",
+    "process.s2.title": "We pick a day and time",
+    "process.s2.body": "I send you my free slots and you pick the pack that suits you best, with no commitment at all.",
+    "process.s3.title": "1-on-1 session",
+    "process.s3.body": "60 to 90 minutes with screen share: your mistakes and how a competitive player would decide in your place.",
+    "process.bring": "<strong>What to bring:</strong> a recent game (replay or your op.gg profile) and a willingness to hear what you are doing wrong.",
+    "faq.eyebrow": "FAQ",
+    "faq.title": "Questions before booking",
+    "faq.q1": "Do I need a minimum rank for this to be worth it?",
+    "faq.a1": "No. I work on your games and your level, so the content changes depending on where you are. All you need is to play regularly enough to apply what we cover.",
+    "faq.q2": "What does a session actually look like?",
+    "faq.a2": "On Discord with screen share, 60 to 90 minutes. We go through your real games: pathing, early and mid game decisions, objective control and the mistakes that keep repeating. No generic theory you cannot use tomorrow.",
+    "faq.q3": "Do you only coach jungle?",
+    "faq.a3": "Jungle is my role and where I can give you the most value. That said, a lot of what we work on (map reading, macro, objective control and decision-making) applies to any lane. If you play another role, message me and I will tell you honestly whether it is worth it.",
+    "faq.q4": "What language are sessions in?",
+    "faq.a4": "Spanish or English, whichever you prefer. Just say so when you message me.",
+    "faq.q6": "What if I cannot make the agreed time?",
+    "faq.a6": "Let me know in advance and we will move it, no problem. Things come up.",
+    "contact.mailto": "mailto:gzlbernal@gmail.com?subject=Session%20booking%20-%20GRX%20Coaching&body=Hi%20Gonzalo%2C%0A%0A-%20Current%20rank%3A%0A-%20Goal%3A%0A-%20Champions%20I%20play%3A%0A-%20Pack%20I%20am%20interested%20in%3A%0A-%20Availability%20%28days%20and%20times%29%3A%0A-%20My%20op.gg%20or%20replay%3A%0A%0AThanks%21%0A",
     "reviews.eyebrow": "Reviews",
     "reviews.title": "What my students say",
     "reviews.prev": "Previous review",
@@ -153,7 +221,7 @@ const translations = {
     "reviews.sora": "I came in thinking I needed to improve mechanics and ended up understanding that the problem was how I made decisions. Gonzalo explains the why behind every play and, above all, teaches you to think for yourself. After a few sessions I noticed a huge difference.",
     "contact.eyebrow": "Contact",
     "contact.title": "Let's talk",
-    "contact.lead": "Join the Discord server or reach out on whichever channel you prefer and we'll set up your session.",
+    "contact.lead": "Send me a DM on Discord at <strong>gromixlol</strong> or join my server and we'll set up your session.",
     "contact.server": "Server",
     "contact.join": "Join ↗",
     "contact.write": "Email",
@@ -161,7 +229,23 @@ const translations = {
   },
 };
 
+function langFromUrl() {
+  try {
+    const value = new URLSearchParams(window.location.search).get("lang");
+    const code = String(value || "").toLowerCase().slice(0, 2);
+    if (code === "en" || code === "es") return code;
+  } catch (err) {
+    // navegador sin URLSearchParams
+  }
+  return null;
+}
+
 function detectLang() {
+  // El parametro de la URL manda: asi /?lang=en es un enlace compartible
+  // y una URL propia que Google puede indexar.
+  const fromUrl = langFromUrl();
+  if (fromUrl) return fromUrl;
+
   try {
     const saved = localStorage.getItem(LANG_KEY);
     if (saved === "en" || saved === "es") return saved;
@@ -239,15 +323,34 @@ function applyLang(lang) {
   window.dispatchEvent(new CustomEvent("grx:langchange", { detail: { lang: next } }));
 }
 
+function syncUrl(lang) {
+  if (!window.history || !window.history.replaceState) return;
+  try {
+    const url = new URL(window.location.href);
+    if (lang === "en") url.searchParams.set("lang", "en");
+    else url.searchParams.delete("lang");
+    window.history.replaceState(null, "", url.toString());
+  } catch (err) {
+    // no pasa nada: el idioma ya se aplico igualmente
+  }
+}
+
 function setLang(lang, persist) {
   const next = lang === "en" ? "en" : "es";
   if (persist) {
     try { localStorage.setItem(LANG_KEY, next); } catch (err) {}
   }
   applyLang(next);
+  syncUrl(next);
 }
 
-applyLang(detectLang());
+try {
+  applyLang(detectLang());
+} catch (err) {
+  // Pase lo que pase, la pagina tiene que verse (queda en el idioma del HTML).
+  document.documentElement.setAttribute("data-i18n-ready", "true");
+  console.error("i18n:", err);
+}
 
 document.querySelectorAll("[data-set-lang]").forEach((btn) => {
   btn.addEventListener("click", () => {

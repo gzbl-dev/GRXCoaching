@@ -5,23 +5,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRX Coaching | Sube de elo en League of Legends</title>
 <meta name="description" content="Coaching de League of Legends con GRX. Sube de elo con sesiones personalizadas.">
+<meta name="author" content="Gonzalo &quot;GRX&quot; Bernal">
+<meta name="theme-color" content="#090d14">
 <link rel="canonical" href="https://grx.coach/">
+<link rel="alternate" hreflang="es" href="https://grx.coach/">
+<link rel="alternate" hreflang="en" href="https://grx.coach/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://grx.coach/">
+
+<meta property="og:site_name" content="GRX Coaching">
 <meta property="og:title" content="GRX Coaching | Sube de elo en League of Legends">
 <meta property="og:description" content="Coaching de League of Legends con GRX. Sube de elo con sesiones personalizadas.">
 <meta property="og:url" content="https://grx.coach/">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://grx.coach/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="GRX Coaching - Sube de elo con un jungla competitivo">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@gromix_lol">
+<meta name="twitter:creator" content="@gromix_lol">
+<meta name="twitter:image" content="https://grx.coach/assets/og-image.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<!-- ANALITICA (pendiente de que elijas proveedor).
+     Sin esto no sabes cuanta gente llega a Packs ni cuantos pulsan "Reservar",
+     asi que no puedes saber si los cambios de esta web funcionan.
+     No lo dejo activado porque envia datos de tus visitantes a un tercero y eso
+     lo decides tu (y condiciona si necesitas aviso de cookies).
+
+     Opcion recomendada: Plausible o Fathom. Sin cookies, sin banner de consentimiento
+     en la UE, una linea de codigo. De pago (~9 EUR/mes).
+       <script defer data-domain="grx.coach" src="https://plausible.io/js/script.js"></script>
+
+     Alternativa gratis: Google Analytics 4. Mas potente, pero usa cookies y te obliga
+     a poner banner de consentimiento.
+
+     Dimelo y lo dejo conectado, con eventos en los botones de Reservar. -->
 <script>
 (function () {
   var KEY = "grx-lang";
   var saved = null;
   try { saved = localStorage.getItem(KEY); } catch (e) {}
   var lang = "es";
-  if (saved === "en" || saved === "es") {
+  var urlLang = null;
+  try {
+    var m = /[?&]lang=([a-zA-Z-]+)/.exec(window.location.search);
+    if (m) {
+      var c = m[1].toLowerCase().slice(0, 2);
+      if (c === "en" || c === "es") urlLang = c;
+    }
+  } catch (e) {}
+
+  if (urlLang) {
+    lang = urlLang;
+  } else if (saved === "en" || saved === "es") {
     lang = saved;
   } else {
     var list = (navigator.languages && navigator.languages.length)
@@ -35,6 +81,13 @@
   }
   document.documentElement.lang = lang;
   document.documentElement.setAttribute("data-lang", lang);
+
+  // Seguro: el CSS oculta el body en ingles hasta que i18n.js marca data-i18n-ready.
+  // Si ese script no llega a ejecutarse (404 tras un deploy, bloqueador, error de
+  // sintaxis), revelamos la pagina igualmente en vez de dejarla en blanco para siempre.
+  setTimeout(function () {
+    document.documentElement.setAttribute("data-i18n-ready", "true");
+  }, 1500);
 })();
 </script>
 <noscript>
@@ -57,7 +110,9 @@
       <a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a>
       <a href="#trayectoria" data-i18n="nav.career">Trayectoria</a>
       <a href="#packs" data-i18n="nav.packs">Packs</a>
+      <a href="#proceso" data-i18n="nav.process">Cómo funciona</a>
       <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
       <a href="#contacto" data-i18n="nav.contact">Contacto</a>
     </nav>
 
@@ -97,7 +152,7 @@
           <span class="rank-tier">JUNGLER</span>
           <span class="rank-lp">+1350 LP</span>
         </div>
-        <img class="hero-card-avatar" src="assets/hero-portrait.png" alt="Gromix (GRX)">
+        <img class="hero-card-avatar" src="assets/hero-portrait.webp" alt="Gromix (GRX)" fetchpriority="high" decoding="async">
       </div>
     </div>
 
@@ -127,7 +182,7 @@
   <section id="sobre-mi" class="section reveal">
     <div class="container about-grid">
       <div class="about-avatar">
-        <img class="about-avatar-inner" src="assets/about-portrait.png" data-i18n="about.photoAlt" data-i18n-attr="alt" alt="Gromix con la camiseta de UCAM Universidad Esports">
+        <img class="about-avatar-inner" src="assets/about-portrait.webp" loading="lazy" decoding="async" data-i18n="about.photoAlt" data-i18n-attr="alt" alt="Gromix con la camiseta de UCAM Universidad Esports">
       </div>
       <div class="about-text">
         <p class="section-eyebrow" data-i18n="about.eyebrow">Sobre mí</p>
@@ -155,7 +210,7 @@
       <p class="section-eyebrow center" data-i18n="career.eyebrow">Trayectoria</p>
       <h2 class="center" data-i18n="career.title">Mi carrera competitiva</h2>
 
-      <img class="trayectoria-banner" src="assets/trayectoria-banner.jpg" data-i18n="career.bannerAlt" data-i18n-attr="alt" alt="Gromix y UCAM Universidad Esports celebrando un título">
+      <img class="trayectoria-banner" src="assets/trayectoria-banner.webp" loading="lazy" decoding="async" data-i18n="career.bannerAlt" data-i18n-attr="alt" alt="Gromix y UCAM Universidad Esports celebrando un título">
 
       <div class="timeline">
         <div class="timeline-item highlight reveal">
@@ -203,8 +258,8 @@
       <p class="section-eyebrow center" data-i18n="packs.eyebrow">Packs de coaching</p>
       <h2 class="center" data-i18n="packs.title">¿Listo para subir de elo?</h2>
       <p class="section-lead center" data-i18n="packs.lead">
-        Sesiones individuales 1 a 1, centradas en tus partidas: VOD review,
-        pathing de jungla, macro y toma de decisiones.
+        Sesiones personalizadas, individuales o en equipo, centradas en tus partidas:
+        VOD review, pathing de jungla, macro y toma de decisiones.
       </p>
 
       <div class="pricing-grid">
@@ -247,12 +302,63 @@
           </ul>
           <a href="#contacto" class="btn btn-outline" data-i18n="packs.book">Reservar</a>
         </div>
+        <div class="price-card price-card-team reveal">
+          <div class="team-head">
+            <h3 data-i18n="packs.team.title">Sesión de equipo</h3>
+            <p class="price"><span class="from" data-i18n="packs.from">Desde</span><span class="amount">25€</span><span class="per" data-i18n="packs.perSession">/ sesión</span></p>
+            <p class="price-note" data-i18n="packs.team.note">Para equipos de flex o 5 man</p>
+          </div>
+          <ul class="price-features">
+            <li data-i18n="packs.team.f1">VOD review del equipo</li>
+            <li data-i18n="packs.team.f2">Análisis de comunicación y macro</li>
+            <li data-i18n="packs.team.f3">Estrategias de draft</li>
+            <li data-i18n="packs.team.f4">Plan de mejora grupal</li>
+          </ul>
+          <div class="team-cta">
+            <p data-i18n="packs.team.cta">El precio depende del equipo y del formato. Escríbeme y lo cuadramos.</p>
+            <a href="#contacto" class="btn btn-outline" data-i18n="packs.team.book">Háblame</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- COMO FUNCIONA -->
+  <!-- NOTA GRX: revisa los 3 pasos y el FAQ. Estan escritos en generico a proposito
+       (no invento plazos de respuesta ni metodos de pago). Ajusta lo que quieras
+       concretar: horarios, Bizum/PayPal, tiempo de respuesta, politica de cancelacion. -->
+  <section id="proceso" class="section section-alt reveal">
+    <div class="container">
+      <p class="section-eyebrow center" data-i18n="process.eyebrow">Cómo funciona</p>
+      <h2 class="center" data-i18n="process.title">De escribirme a tu primera sesión</h2>
+      <p class="section-lead center" data-i18n="process.lead">Sin formularios largos ni intermediarios. Tres pasos y estamos dentro.</p>
+
+      <ol class="steps">
+        <li class="step reveal">
+          <span class="step-num">1</span>
+          <h3 data-i18n="process.s1.title">Escríbeme</h3>
+          <p data-i18n="process.s1.body">Por Discord, correo o Twitter. Cuéntame tus objetivos, tu elo actual y qué crees que te está frenando.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">2</span>
+          <h3 data-i18n="process.s2.title">Cuadramos día y hora</h3>
+          <p data-i18n="process.s2.body">Te paso los huecos que tenga y eliges el pack que mejor se adapte a ti, sin ningún compromiso.</p>
+        </li>
+        <li class="step reveal">
+          <span class="step-num">3</span>
+          <h3 data-i18n="process.s3.title">Sesión 1 a 1</h3>
+          <p data-i18n="process.s3.body">De 60 a 90 minutos compartiendo pantalla: tus errores y cómo decidiría en tu lugar un jugador competitivo.</p>
+        </li>
+      </ol>
+
+      <p class="steps-note center" data-i18n="process.bring" data-i18n-html>
+        <strong>Qué traer:</strong> una partida reciente (replay o tu perfil de op.gg) y ganas de que te señalen lo que estás haciendo mal.
+      </p>
+    </div>
+  </section>
+
   <!-- REVIEWS -->
-  <section id="reviews" class="section section-alt reveal">
+  <section id="reviews" class="section reveal">
     <div class="container container-wide">
       <p class="section-eyebrow center" data-i18n="reviews.eyebrow">Reviews</p>
       <h2 class="center" data-i18n="reviews.title">Lo que dicen mis alumnos</h2>
@@ -260,35 +366,35 @@
       <div class="reviews-carousel">
         <button class="carousel-arrow prev" id="carouselPrev" data-i18n="reviews.prev" data-i18n-attr="aria-label" aria-label="Review anterior">‹</button>
 
-        <div class="reviews-track-wrap">
+        <div class="reviews-track-wrap" tabindex="0" role="group" data-i18n="reviews.title" data-i18n-attr="aria-label" aria-label="Lo que dicen mis alumnos">
           <div class="reviews-track" id="reviewsTrack">
             <article class="review-card">
-              <img class="review-avatar" src="assets/review-simpy.webp" alt="Simpy">
+              <img class="review-avatar" src="assets/review-simpy.webp" alt="Simpy" loading="lazy" decoding="async">
               <p class="review-quote" data-i18n="reviews.simpy">Conozco a Gonzalo de la escena competitiva, sus sesiones van directas al grano, sin teoría vacía. Si de verdad quieres entender cómo se juega este rol a un nivel decente, GRX es el coach indicado.</p>
               <p class="review-name">Simpy</p>
               <p class="review-role" data-i18n="reviews.role.pro">Pro</p>
             </article>
             <article class="review-card">
-              <img class="review-avatar" src="assets/review-quevedo.jpg" alt="Quevedo">
+              <img class="review-avatar" src="assets/review-quevedo.webp" alt="Quevedo" loading="lazy" decoding="async">
               <p class="review-quote" data-i18n="reviews.quevedo">Gonzalo me ha ayudado muchísimo a corregir mis errores de macro y a no tiltearme en mis partidas. Te explica el control de objetivos y la toma de decisiones de una forma súper clara. Es cercano y profesional</p>
               <p class="review-name">Quevedo</p>
               <p class="review-role" data-i18n="reviews.role.streamer">Streamer</p>
             </article>
             <article class="review-card">
-              <img class="review-avatar" src="assets/review-polak09.jpg" alt="Polak09">
+              <img class="review-avatar" src="assets/review-polak09.webp" alt="Polak09" loading="lazy" decoding="async">
               <p class="review-quote" data-i18n="reviews.polak">Mejor de lo que me esperaba. Te da una visión del juego diferente a lo que los coach normales te dicen. Es realista y aplicable a las partidas.</p>
               <p class="review-name">Polak09</p>
               <p class="review-role" data-i18n="reviews.role.student">Alumno</p>
             </article>
             <article class="review-card">
-              <img class="review-avatar" src="assets/review-irfs.png" alt="Irfs">
+              <img class="review-avatar" src="assets/review-irfs.webp" alt="Irfs" loading="lazy" decoding="async">
               <p class="review-quote" data-i18n="reviews.irfs">He compartido equipo con Gonzalo y, más allá de la experiencia competitiva, lo que de verdad le hace buen coach es la cantidad de horas que le mete a SoloQ.
 No te va a vender humo con teorías súper complejas, te enseña de forma práctica a leer el mapa, castigar los errores del rival y tomar buenas decisiones en la jungla.</p>
               <p class="review-name">Irfs</p>
               <p class="review-role">Pro & ADC Coach</p>
             </article>
             <article class="review-card">
-              <img class="review-avatar" src="assets/review-sora.jpg" alt="Sora">
+              <img class="review-avatar" src="assets/review-sora.webp" alt="Sora" loading="lazy" decoding="async">
               <p class="review-quote" data-i18n="reviews.sora">Entré pensando que necesitaba mejorar mecánicas y acabé entendiendo que el problema era cómo tomaba decisiones. Gonzalo te explica el porqué de cada jugada y, sobre todo, te enseña a pensar por tu cuenta. Después de unas sesiones noté muchísimo la diferencia.</p>
               <p class="review-name">Sora</p>
               <p class="review-role" data-i18n="reviews.role.pro">Pro</p>
@@ -302,12 +408,43 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section id="faq" class="section section-alt reveal">
+    <div class="container container-narrow">
+      <p class="section-eyebrow center" data-i18n="faq.eyebrow">Preguntas frecuentes</p>
+      <h2 class="center" data-i18n="faq.title">Dudas antes de reservar</h2>
+
+      <div class="faq-list">
+        <details class="faq-item reveal">
+          <summary data-i18n="faq.q1">¿Necesito un rango mínimo para que me sirva?</summary>
+          <div class="faq-body"><p data-i18n="faq.a1">No. Trabajo sobre tus partidas y tu nivel, así que el contenido cambia según dónde estés. Lo único que hace falta es que juegues con cierta regularidad para poder aplicar lo que veamos.</p></div>
+        </details>
+        <details class="faq-item reveal">
+          <summary data-i18n="faq.q2">¿Cómo es una sesión por dentro?</summary>
+          <div class="faq-body"><p data-i18n="faq.a2">Por Discord con pantalla compartida, entre 60 y 90 minutos. Revisamos partidas tuyas reales: pathing, decisiones en early y mid, control de objetivos y los errores que se repiten. Nada de teoría genérica que no puedas aplicar mañana.</p></div>
+        </details>
+        <details class="faq-item reveal">
+          <summary data-i18n="faq.q3">¿Solo coacheas jungla?</summary>
+          <div class="faq-body"><p data-i18n="faq.a3">La jungla es mi rol y donde más valor te puedo dar. Dicho eso, buena parte de lo que trabajamos (lectura de mapa, macro, control de objetivos y toma de decisiones) se aplica a cualquier línea. Si juegas otro rol, escríbeme y te digo con sinceridad si te compensa.</p></div>
+        </details>
+        <details class="faq-item reveal">
+          <summary data-i18n="faq.q4">¿En qué idioma damos la sesión?</summary>
+          <div class="faq-body"><p data-i18n="faq.a4">Español o inglés, el que prefieras. Dilo al escribirme.</p></div>
+        </details>
+        <details class="faq-item reveal">
+          <summary data-i18n="faq.q6">¿Y si no puedo asistir a la hora acordada?</summary>
+          <div class="faq-body"><p data-i18n="faq.a6">Avísame con antelación y la movemos sin problema. Entiendo que a veces surgen cosas.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACTO -->
   <section id="contacto" class="section reveal">
     <div class="container">
       <p class="section-eyebrow center" data-i18n="contact.eyebrow">Contacto</p>
       <h2 class="center" data-i18n="contact.title">¿Hablamos?</h2>
-      <p class="section-lead center" data-i18n="contact.lead">Entra al servidor de Discord o escríbeme por el canal que prefieras y cuadramos tu sesión.</p>
+      <p class="section-lead center" data-i18n="contact.lead" data-i18n-html>Escríbeme por privado en Discord a <strong>gromixlol</strong> o entra en mi servidor y cuadramos tu sesión.</p>
 
       <div class="contact-grid">
         <a class="contact-card reveal" href="https://discord.gg/baMFcSazEA" target="_blank" rel="noopener">
@@ -319,7 +456,7 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
           <span class="contact-hint" data-i18n="contact.join">Unirse ↗</span>
         </a>
 
-        <a class="contact-card reveal" href="mailto:gzlbernal@gmail.com">
+        <a class="contact-card reveal" data-i18n="contact.mailto" data-i18n-attr="href" href="mailto:gzlbernal@gmail.com">
           <span class="contact-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18.5v-13Zm2.2.5 7.8 6.1L19.8 6H4.2ZM20 8.09l-7.4 5.8a1 1 0 0 1-1.2 0L4 8.09V18h16V8.09Z"/></svg>
           </span>
@@ -344,13 +481,179 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="brand">
-      <img class="brand-mark small" src="assets/logo-mark.svg" alt="GRX">
+      <img class="brand-mark small" src="assets/logo-mark.svg" alt="GRX" loading="lazy">
       <span class="brand-name small">GRX COACHING</span>
     </div>
     <p class="footer-note">© <span id="year"></span> Gonzalo "GRX" Bernal </p>
   </div>
 </footer>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://grx.coach/#gonzalo",
+      "name": "Gonzalo \"GRX\" Bernal",
+      "alternateName": [
+        "GRX",
+        "Gromix"
+      ],
+      "jobTitle": "Coach y jugador profesional de League of Legends",
+      "description": "Jungla competitivo de League of Legends y coach individual. Tricampeon de la Liga Universitaria Espanola con UCAM University.",
+      "url": "https://grx.coach/",
+      "image": "https://grx.coach/assets/og-image.jpg",
+      "sameAs": [
+        "https://x.com/gromix_lol",
+        "https://lol.fandom.com/wiki/GRX",
+        "https://discord.gg/baMFcSazEA"
+      ],
+      "knowsAbout": [
+        "League of Legends",
+        "Jungla",
+        "Coaching de esports",
+        "Macro",
+        "VOD review"
+      ],
+      "knowsLanguage": [
+        "es",
+        "en"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://grx.coach/#coaching",
+      "name": "GRX Coaching - Coaching de League of Legends",
+      "serviceType": "Coaching individual de League of Legends (jungla)",
+      "description": "Sesiones individuales 1 a 1 de League of Legends centradas en tus propias partidas: VOD review, pathing de jungla, control de objetivos, macro y toma de decisiones.",
+      "provider": {
+        "@id": "https://grx.coach/#gonzalo"
+      },
+      "areaServed": {
+        "@type": "Place",
+        "name": "Online (EUW)"
+      },
+      "availableLanguage": [
+        "es",
+        "en"
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Jugadores de League of Legends que quieren subir de elo"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Packs de coaching",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Sesion individual",
+            "price": "15",
+            "priceCurrency": "EUR",
+            "description": "Una sesion 1 a 1 de 60-90 min: review de VOD/replay, analisis de pathing y objetivos, feedback de matchups.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://grx.coach/#packs",
+            "category": "Coaching de League of Legends"
+          },
+          {
+            "@type": "Offer",
+            "name": "Pack 3 sesiones",
+            "price": "40",
+            "priceCurrency": "EUR",
+            "description": "Tres sesiones de 60-90 min con seguimiento de progresion y plan de mejora personalizado. 13,3 EUR por sesion.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://grx.coach/#packs",
+            "category": "Coaching de League of Legends"
+          },
+          {
+            "@type": "Offer",
+            "name": "Pack 5 sesiones",
+            "price": "60",
+            "priceCurrency": "EUR",
+            "description": "Cinco sesiones de 60-90 min para una mejora sostenida a medio plazo. 12 EUR por sesion.",
+            "availability": "https://schema.org/InStock",
+            "url": "https://grx.coach/#packs",
+            "category": "Coaching de League of Legends"
+          },
+          {
+            "@type": "Offer",
+            "name": "Sesion de equipo",
+            "description": "Sesion para equipos de flex o 5 man: VOD review del equipo, comunicacion y macro, estrategias de draft y plan de mejora grupal. Precio segun equipo y formato.",
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "minPrice": "25",
+              "priceCurrency": "EUR"
+            },
+            "availability": "https://schema.org/InStock",
+            "url": "https://grx.coach/#packs",
+            "category": "Coaching de League of Legends"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://grx.coach/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Necesito un rango minimo para que me sirva?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Trabajo sobre tus partidas y tu nivel, asi que el contenido cambia segun donde estes. Lo unico que hace falta es que juegues con cierta regularidad para poder aplicar lo que veamos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como es una sesion por dentro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Por Discord con pantalla compartida, entre 60 y 90 minutos. Revisamos partidas tuyas reales: pathing, decisiones en early y mid, control de objetivos y los errores que se repiten."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Solo coacheas jungla?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La jungla es mi rol y donde mas valor te puedo dar. Dicho eso, buena parte de lo que trabajamos (lectura de mapa, macro, control de objetivos y toma de decisiones) se aplica a cualquier linea."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "En que idioma damos la sesion?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Espanol o ingles, el que prefieras. Dilo al escribirme."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Y si no puedo asistir a la hora acordada?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Avisame con antelacion y la movemos sin problema."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://grx.coach/#website",
+      "url": "https://grx.coach/",
+      "name": "GRX Coaching",
+      "inLanguage": [
+        "es",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://grx.coach/#gonzalo"
+      }
+    }
+  ]
+}
+</script>
 <script src="js/i18n.js"></script>
 <script src="js/main.js"></script>
 </body>
