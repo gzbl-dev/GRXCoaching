@@ -318,7 +318,7 @@ html[data-lang="en"]:not([data-i18n-ready]) body {
   border-radius: 999px;
   box-shadow: 0 10px 24px rgba(200,164,92,0.35);
 }
-.rank-tier { font-family: var(--font-display); font-weight: 900; font-size: 0.9rem; letter-spacing: 1px; }
+.rank-tier { font-family: var(--font-display); font-weight: 900; font-size: 0.9rem; letter-spacing: 1px; white-space: nowrap; }
 .rank-lp { font-size: 0.72rem; font-weight: 700; }
 
 .hero-card-avatar {
