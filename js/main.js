@@ -112,7 +112,9 @@ if (reviewsTrack) {
 
   function stepPx() {
     const trackGap = parseFloat(getComputedStyle(reviewsTrack).gap) || 0;
-    return cards[0].getBoundingClientRect().width + trackGap;
+    // El ancho calculado ignora el scale() de las tarjetas apagadas (.is-out), el rect no.
+    // (offsetWidth tambien lo ignora, pero redondea y el error se acumula al avanzar.)
+    return parseFloat(getComputedStyle(cards[0]).width) + trackGap;
   }
 
   function rebuildDots() {
@@ -132,16 +134,100 @@ if (reviewsTrack) {
   function render() {
     reviewsTrack.style.transform = `translateX(-${current * stepPx()}px)`;
     Array.from(dotsWrap.children).forEach((dot, i) => dot.classList.toggle("active", i === current));
+    const shown = visibleCount();
+    cards.forEach((card, i) => card.classList.toggle("is-out", i < current || i >= current + shown));
   }
 
   function goTo(index) {
     current = (index + maxIndex + 1) % (maxIndex + 1);
     render();
+    restartAutoplay();
+  }
+
+  // Autoplay: avanza solo, pero se para cuando el usuario esta mirando o tocando el
+  // carrusel, cuando no esta en pantalla o la pestaña esta oculta, y nunca arranca
+  // si el sistema pide movimiento reducido.
+  const AUTOPLAY_MS = 5500;
+  const carouselEl = wrapEl.closest(".reviews-carousel") || wrapEl;
+  const autoplayAllowed = !reducedMotion.matches;
+  let autoTimer = null, autoStartedAt = 0, autoRemaining = AUTOPLAY_MS;
+  let hovering = false, focusedByKeyboard = false, touching = false, inView = false;
+
+  dotsWrap.style.setProperty("--autoplay-ms", `${AUTOPLAY_MS}ms`);
+  dotsWrap.classList.toggle("is-autoplay", autoplayAllowed);
+
+  function shouldRun() {
+    return autoplayAllowed && maxIndex > 0 && inView && !document.hidden
+      && !hovering && !focusedByKeyboard && !touching;
+  }
+
+  function stopTimer() {
+    if (!autoTimer) return;
+    clearTimeout(autoTimer);
+    autoTimer = null;
+    autoRemaining = Math.max(0, autoRemaining - (Date.now() - autoStartedAt));
+  }
+
+  function updateAutoplay() {
+    const run = shouldRun();
+    dotsWrap.classList.toggle("is-paused", !run);
+    if (run && !autoTimer) {
+      autoStartedAt = Date.now();
+      autoTimer = setTimeout(() => {
+        autoTimer = null;
+        goTo(current + 1);
+      }, autoRemaining);
+    } else if (!run) {
+      stopTimer();
+    }
+  }
+
+  function restartAutoplay() {
+    if (!autoplayAllowed) return;
+    clearTimeout(autoTimer);
+    autoTimer = null;
+    autoRemaining = AUTOPLAY_MS;
+    // Reinicia la barrita del punto activo aunque el indice no cambie
+    const active = dotsWrap.querySelector("button.active");
+    if (active) {
+      active.classList.remove("active");
+      void active.offsetWidth;
+      active.classList.add("active");
+    }
+    updateAutoplay();
+  }
+
+  carouselEl.addEventListener("mouseenter", () => { hovering = true; updateAutoplay(); });
+  carouselEl.addEventListener("mouseleave", () => { hovering = false; updateAutoplay(); });
+  carouselEl.addEventListener("focusin", (e) => {
+    // Solo pausamos con foco de teclado: tras un clic en una flecha el boton se queda
+    // con el foco y no queremos que el carrusel se quede parado para siempre.
+    let kb = true;
+    try { kb = e.target.matches(":focus-visible"); } catch (err) {}
+    focusedByKeyboard = kb;
+    updateAutoplay();
+  });
+  carouselEl.addEventListener("focusout", (e) => {
+    if (!carouselEl.contains(e.relatedTarget)) { focusedByKeyboard = false; updateAutoplay(); }
+  });
+  wrapEl.addEventListener("touchstart", () => { touching = true; updateAutoplay(); }, { passive: true });
+  wrapEl.addEventListener("touchend", () => { touching = false; updateAutoplay(); });
+  wrapEl.addEventListener("touchcancel", () => { touching = false; updateAutoplay(); });
+  document.addEventListener("visibilitychange", updateAutoplay);
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver((entries) => {
+      inView = entries[0].isIntersecting;
+      updateAutoplay();
+    }, { threshold: 0.35 }).observe(carouselEl);
+  } else {
+    inView = true;
   }
 
   function recalc() {
     const newMaxIndex = Math.max(0, cards.length - visibleCount());
-    if (newMaxIndex !== maxIndex) {
+    const changed = newMaxIndex !== maxIndex;
+    if (changed) {
       maxIndex = newMaxIndex;
       current = Math.min(current, maxIndex);
       rebuildDots();
@@ -151,6 +237,7 @@ if (reviewsTrack) {
     nextBtn.classList.toggle("is-hidden", hideNav);
     dotsWrap.classList.toggle("is-hidden", hideNav);
     render();
+    if (changed) restartAutoplay(); else updateAutoplay();
   }
 
   prevBtn.addEventListener("click", () => goTo(current - 1));
@@ -202,7 +289,7 @@ if (reviewsTrack) {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(recalc, 120);
   });
-  window.addEventListener("grx:langchange", () => { rebuildDots(); render(); });
+  window.addEventListener("grx:langchange", () => { rebuildDots(); render(); restartAutoplay(); });
 
   recalc();
 }

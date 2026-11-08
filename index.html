@@ -4,30 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GRX Coaching | Sube de elo en League of Legends</title>
-<meta name="description" content="Coaching de League of Legends con GRX. Sube de elo con sesiones personalizadas.">
+<meta name="description" content="Coaching de League of Legends con GRX, head coach de Oxygen Gaming. Sube de elo con sesiones personalizadas.">
 <meta name="author" content="Gonzalo &quot;GRX&quot; Bernal">
 <meta name="theme-color" content="#090d14">
-<link rel="canonical" href="https://grx.coach/">
 <link rel="alternate" hreflang="es" href="https://grx.coach/">
 <link rel="alternate" hreflang="en" href="https://grx.coach/?lang=en">
 <link rel="alternate" hreflang="x-default" href="https://grx.coach/">
 
 <meta property="og:site_name" content="GRX Coaching">
 <meta property="og:title" content="GRX Coaching | Sube de elo en League of Legends">
-<meta property="og:description" content="Coaching de League of Legends con GRX. Sube de elo con sesiones personalizadas.">
+<meta property="og:description" content="Coaching de League of Legends con GRX, head coach de Oxygen Gaming. Sube de elo con sesiones personalizadas.">
 <meta property="og:url" content="https://grx.coach/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:locale:alternate" content="en_US">
-<meta property="og:image" content="https://grx.coach/assets/og-image.jpg">
+<meta property="og:image" content="https://grx.coach/assets/og-image.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="GRX Coaching - Sube de elo con un jungla competitivo">
+<meta property="og:image:alt" content="GRX Coaching - Gonzalo &quot;GRX&quot;, head coach de Oxygen Gaming">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@gromix_lol">
 <meta name="twitter:creator" content="@gromix_lol">
-<meta name="twitter:image" content="https://grx.coach/assets/og-image.jpg">
+<meta name="twitter:image" content="https://grx.coach/assets/og-image.jpg?v=2">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,8 +64,15 @@
     }
   } catch (e) {}
 
+  // Los buscadores renderizan con el navegador en ingles (en-US). Sin esto, Google
+  // indexaba la portada en ingles. Un bot solo ve ingles si la URL lo pide (?lang=en).
+  var isBot = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|lighthouse|google-inspectiontool|headlesschrome/i
+    .test(navigator.userAgent || "");
+
   if (urlLang) {
     lang = urlLang;
+  } else if (isBot) {
+    lang = "es";
   } else if (saved === "en" || saved === "es") {
     lang = saved;
   } else {
@@ -81,6 +87,15 @@
   }
   document.documentElement.lang = lang;
   document.documentElement.setAttribute("data-lang", lang);
+  window.__grxIsBot = isBot;
+
+  // Canonical segun la URL: /?lang=en es su propia pagina (la pareja del hreflang),
+  // no un duplicado de la portada. Se crea aqui, y no en el HTML, para que Google
+  // no vea dos canonicals distintos (el del HTML y el que pondria el JS).
+  var canonical = document.createElement("link");
+  canonical.rel = "canonical";
+  canonical.href = urlLang === "en" ? "https://grx.coach/?lang=en" : "https://grx.coach/";
+  document.head.appendChild(canonical);
 
   // Seguro: el CSS oculta el body en ingles hasta que i18n.js marca data-i18n-ready.
   // Si ese script no llega a ejecutarse (404 tras un deploy, bloqueador, error de
@@ -137,7 +152,7 @@
         <p class="eyebrow" data-i18n="hero.eyebrow">Mejora tu gameplay - Alcanza tu máximo potencial</p>
         <h1 data-i18n="hero.title">Sube elo con un jungla con experiencia</h1>
         <p class="hero-lead" data-i18n="hero.lead" data-i18n-html>
-          Soy Gonzalo <strong>“GRX”</strong>, jugador asiduo de alto nivel. Coacheo desde mi propia experiencia
+          Soy Gonzalo <strong>“GRX”</strong>, <strong>head coach de Oxygen Gaming</strong> en el Circuito Tormenta y jugador asiduo de alto nivel. Coacheo desde mi propia experiencia
           jugando SoloQ cada día, aplicando lo aprendido en la escena competitiva, no hace falta un manual ni aprender la teoría completa.
           Me adapto a cualquier situación.
         </p>
@@ -152,7 +167,7 @@
           <span class="rank-tier">JUNGLER</span>
           <span class="rank-lp">+1350 LP</span>
         </div>
-        <img class="hero-card-avatar" src="assets/hero-portrait.webp" alt="Gromix (GRX)" fetchpriority="high" decoding="async">
+        <img class="hero-card-avatar" src="assets/hero-portrait.webp" width="480" height="480" alt="Gromix (GRX)" fetchpriority="high" decoding="async">
       </div>
     </div>
 
@@ -186,13 +201,14 @@
       </div>
       <div class="about-text">
         <p class="section-eyebrow" data-i18n="about.eyebrow">Sobre mí</p>
-        <h2 data-i18n="about.title">De UCAM Esports al coaching individual</h2>
+        <h2 data-i18n="about.title">De UCAM Esports a head coach</h2>
         <p data-i18n="about.p1" data-i18n-html>
           Empecé mi carrera competitiva en 2022 en la cantera de <strong>UCAM Esports Academy</strong>, compaginando la competición con mis estudios,
           en 2023 di el salto de suplente al primer equipo en <strong>Superliga</strong>. Desde entonces he competido
           con <strong>UCAM University Esports</strong>, <strong>Tan'i eSports</strong> y <strong>Oxygen Gaming</strong>,
           y soy <strong>tricampeón de la Liga Universitaria Española de League of Legends</strong>
-          con UCAM University.
+          con UCAM University. Desde noviembre de 2026 soy <strong>head coach de Oxygen Gaming</strong>,
+          número 1 del Circuito Tormenta.
         </p>
         <p data-i18n="about.p2" data-i18n-html>
           Actualmente soy <strong>Rank 2000 de EUW </strong>en soloQ (peak +1350 LP) y quiero ayudarte a entender la jungla
@@ -213,6 +229,19 @@
       <img class="trayectoria-banner" src="assets/trayectoria-banner.webp" loading="lazy" decoding="async" data-i18n="career.bannerAlt" data-i18n-attr="alt" alt="Gromix y UCAM Universidad Esports celebrando un título">
 
       <div class="timeline">
+        <div class="timeline-item highlight reveal">
+          <span class="timeline-year" data-i18n="career.o2g.date">Nov 2026</span>
+          <div class="timeline-body timeline-body-media">
+            <a class="timeline-media" href="https://x.com/GamingOxygen/status/2118726121470447859" target="_blank" rel="noopener">
+              <img src="assets/oxygen-head-coach.webp" width="480" height="600" loading="lazy" decoding="async" data-i18n="career.o2g.imgAlt" data-i18n-attr="alt" alt="Cartel de Oxygen Gaming dando la bienvenida a Gromix como head coach de League of Legends">
+            </a>
+            <div>
+              <h3 data-i18n="career.o2g.title">Head Coach de Oxygen Gaming</h3>
+              <p data-i18n="career.o2g.body">Me incorporo como head coach de Oxygen Gaming, equipo número 1 del Circuito Tormenta (segunda división española) durante todo el año. Dirijo al equipo en draft, preparación de rivales y revisión de partidas.</p>
+              <a href="https://x.com/GamingOxygen/status/2118726121470447859" target="_blank" rel="noopener" class="link-inline" data-i18n="career.o2g.link">Ver el anuncio ↗</a>
+            </div>
+          </div>
+        </div>
         <div class="timeline-item highlight reveal">
           <span class="timeline-year">2026</span>
           <div class="timeline-body">
@@ -369,16 +398,34 @@
         <div class="reviews-track-wrap" tabindex="0" role="group" data-i18n="reviews.title" data-i18n-attr="aria-label" aria-label="Lo que dicen mis alumnos">
           <div class="reviews-track" id="reviewsTrack">
             <article class="review-card">
+              <img class="review-avatar" src="assets/review-kymist.webp" alt="Kymist" loading="lazy" decoding="async">
+              <p class="review-quote" data-i18n="reviews.kymist">Después de 3 sesiones entiendo cómo y por qué tomar decisiones en la jungla. Revisamos varias partidas en cada sesión y pasé de jugar totalmente pasivo a castigar al jungla enemigo en cada error. He subido de Platino a Diamante.</p>
+              <p class="review-name">Kymist</p>
+              <p class="review-role" data-i18n="reviews.role.kymist">Platino → Diamante</p>
+            </article>
+            <article class="review-card">
+              <img class="review-avatar" src="assets/review-solet.webp" alt="Solet" loading="lazy" decoding="async">
+              <p class="review-quote" data-i18n="reviews.solet">Con unas pocas recomendaciones de builds y algo de micro, por fin soy competente con Qiyana en mi elo y me veo en lobbies más altos. Coach muy recomendable para mejorar con casi cualquier jungla.</p>
+              <p class="review-name">Solet</p>
+              <p class="review-role" data-i18n="reviews.role.solet">+604 LP en 30 días</p>
+            </article>
+            <article class="review-card">
               <img class="review-avatar" src="assets/review-simpy.webp" alt="Simpy" loading="lazy" decoding="async">
               <p class="review-quote" data-i18n="reviews.simpy">Conozco a Gonzalo de la escena competitiva, sus sesiones van directas al grano, sin teoría vacía. Si de verdad quieres entender cómo se juega este rol a un nivel decente, GRX es el coach indicado.</p>
               <p class="review-name">Simpy</p>
               <p class="review-role" data-i18n="reviews.role.pro">Pro</p>
             </article>
             <article class="review-card">
-              <img class="review-avatar" src="assets/review-quevedo.webp" alt="Quevedo" loading="lazy" decoding="async">
-              <p class="review-quote" data-i18n="reviews.quevedo">Gonzalo me ha ayudado muchísimo a corregir mis errores de macro y a no tiltearme en mis partidas. Te explica el control de objetivos y la toma de decisiones de una forma súper clara. Es cercano y profesional</p>
-              <p class="review-name">Quevedo</p>
-              <p class="review-role" data-i18n="reviews.role.streamer">Streamer</p>
+              <img class="review-avatar" src="assets/review-tempest.webp" alt="Tempest" loading="lazy" decoding="async">
+              <p class="review-quote" data-i18n="reviews.tempest">Me ha resuelto muchos problemas que tenía para subir en Master. Se mira tus partidas y analiza cada error para que no lo vuelvas a cometer. Ahora aplico sus consejos y estoy ganando partidas.</p>
+              <p class="review-name">Tempest</p>
+              <p class="review-role" data-i18n="reviews.role.tempest">Master</p>
+            </article>
+            <article class="review-card">
+              <img class="review-avatar" src="assets/review-sagiri.webp" alt="sagiri" loading="lazy" decoding="async">
+              <p class="review-quote" data-i18n="reviews.sagiri">Muy buena persona y coach. Te analiza a fondo tus partidas, se prepara las sesiones y te dice con claridad en qué deberías mejorar. Vale mucho la pena, no os va a defraudar.</p>
+              <p class="review-name">sagiri</p>
+              <p class="review-role" data-i18n="reviews.role.student">Alumno</p>
             </article>
             <article class="review-card">
               <img class="review-avatar" src="assets/review-polak09.webp" alt="Polak09" loading="lazy" decoding="async">
@@ -387,17 +434,16 @@
               <p class="review-role" data-i18n="reviews.role.student">Alumno</p>
             </article>
             <article class="review-card">
-              <img class="review-avatar" src="assets/review-irfs.webp" alt="Irfs" loading="lazy" decoding="async">
-              <p class="review-quote" data-i18n="reviews.irfs">He compartido equipo con Gonzalo y, más allá de la experiencia competitiva, lo que de verdad le hace buen coach es la cantidad de horas que le mete a SoloQ.
-No te va a vender humo con teorías súper complejas, te enseña de forma práctica a leer el mapa, castigar los errores del rival y tomar buenas decisiones en la jungla.</p>
-              <p class="review-name">Irfs</p>
-              <p class="review-role">Pro & ADC Coach</p>
-            </article>
-            <article class="review-card">
               <img class="review-avatar" src="assets/review-sora.webp" alt="Sora" loading="lazy" decoding="async">
               <p class="review-quote" data-i18n="reviews.sora">Entré pensando que necesitaba mejorar mecánicas y acabé entendiendo que el problema era cómo tomaba decisiones. Gonzalo te explica el porqué de cada jugada y, sobre todo, te enseña a pensar por tu cuenta. Después de unas sesiones noté muchísimo la diferencia.</p>
               <p class="review-name">Sora</p>
               <p class="review-role" data-i18n="reviews.role.pro">Pro</p>
+            </article>
+            <article class="review-card">
+              <img class="review-avatar" src="assets/review-quevedo.webp" alt="Quevedo" loading="lazy" decoding="async">
+              <p class="review-quote" data-i18n="reviews.quevedo">Gonzalo me ha ayudado muchísimo a corregir mis errores de macro y a no tiltearme en mis partidas. Te explica el control de objetivos y la toma de decisiones de una forma súper clara. Es cercano y profesional</p>
+              <p class="review-name">Quevedo</p>
+              <p class="review-role" data-i18n="reviews.role.streamer">Streamer</p>
             </article>
           </div>
         </div>
@@ -500,10 +546,16 @@ No te va a vender humo con teorías súper complejas, te enseña de forma práct
         "GRX",
         "Gromix"
       ],
-      "jobTitle": "Coach y jugador profesional de League of Legends",
-      "description": "Jungla competitivo de League of Legends y coach individual. Tricampeon de la Liga Universitaria Espanola con UCAM University.",
+      "jobTitle": "Head Coach de Oxygen Gaming (League of Legends)",
+      "worksFor": {
+        "@type": "SportsTeam",
+        "name": "Oxygen Gaming",
+        "sport": "League of Legends",
+        "sameAs": "https://x.com/GamingOxygen"
+      },
+      "description": "Head coach de Oxygen Gaming en el Circuito Tormenta, jungla competitivo de League of Legends y coach individual. Tricampeon de la Liga Universitaria Espanola con UCAM University.",
       "url": "https://grx.coach/",
-      "image": "https://grx.coach/assets/og-image.jpg",
+      "image": "https://grx.coach/assets/hero-portrait.webp",
       "sameAs": [
         "https://x.com/gromix_lol",
         "https://lol.fandom.com/wiki/GRX",

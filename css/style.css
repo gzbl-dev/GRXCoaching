@@ -468,6 +468,31 @@ html[data-lang="en"]:not([data-i18n-ready]) body {
 
 .timeline-body h3 { margin-bottom: 6px; font-size: 1.1rem; }
 .timeline-body p { margin: 0; }
+.timeline-body .link-inline { display: inline-block; margin-top: 8px; font-size: 0.9rem; }
+
+.timeline-body-media {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+.timeline-media {
+  flex: 0 0 140px;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(200,164,92,0.25);
+  transition: transform 0.2s ease;
+}
+.timeline-media:hover { transform: translateY(-2px); }
+.timeline-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 560px) {
+  .timeline-body-media { flex-direction: column; align-items: flex-start; }
+  .timeline-media { flex-basis: auto; width: 100%; max-width: 260px; }
+}
 
 .timeline-item.highlight .timeline-body {
   background: rgba(200,164,92,0.06);
@@ -608,6 +633,18 @@ html[data-lang="en"]:not([data-i18n-ready]) body {
   border: 2px solid var(--gold);
   margin: 0 auto 22px;
 }
+.review-avatar-initial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 30% 25%, rgba(200,164,92,0.35), rgba(200,164,92,0.08) 70%);
+  color: var(--gold-bright);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  user-select: none;
+}
 
 .review-quote {
   color: var(--text);
@@ -680,6 +717,41 @@ html[data-lang="en"]:not([data-i18n-ready]) body {
   cursor: pointer;
 }
 .carousel-dots button.active { background: var(--gold); }
+
+/* Autoplay: el punto activo se estira y se va llenando hasta el siguiente cambio */
+.carousel-dots button {
+  position: relative;
+  overflow: hidden;
+  transition: width 0.4s ease, background 0.3s ease;
+}
+.carousel-dots.is-autoplay button.active {
+  width: 28px;
+  border-radius: 4px;
+  background: var(--panel-border);
+}
+.carousel-dots.is-autoplay button.active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform-origin: left center;
+  animation: dotFill var(--autoplay-ms, 5500ms) linear forwards;
+}
+.carousel-dots.is-autoplay.is-paused button.active::after { animation-play-state: paused; }
+@keyframes dotFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Las tarjetas que salen de la vista se apagan y las que entran aparecen */
+.reviews-track { transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+.review-card {
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.review-card.is-out {
+  opacity: 0.25;
+  transform: scale(0.94);
+}
 .carousel-dots.is-hidden { display: none; }
 
 /* ---------- Contact ---------- */

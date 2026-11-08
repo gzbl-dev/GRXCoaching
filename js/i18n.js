@@ -3,7 +3,7 @@ const LANG_KEY = "grx-lang";
 const translations = {
   es: {
     "meta.title": "GRX Coaching | Sube de elo en League of Legends",
-    "meta.description": "Coaching de League of Legends con GRX. Sube de elo con sesiones personalizadas.",
+    "meta.description": "Coaching de League of Legends con GRX, head coach de Oxygen Gaming. Sube de elo con sesiones personalizadas.",
     "lang.label": "Idioma",
     "nav.about": "Sobre mí",
     "nav.career": "Trayectoria",
@@ -14,7 +14,7 @@ const translations = {
     "cta.book": "Reserva tu sesión",
     "hero.eyebrow": "Mejora tu gameplay - Alcanza tu máximo potencial",
     "hero.title": "Sube elo con un jungla con experiencia",
-    "hero.lead": "Soy Gonzalo <strong>“GRX”</strong>, jugador asiduo de alto nivel. Coacheo desde mi propia experiencia jugando SoloQ cada día, aplicando lo aprendido en la escena competitiva, no hace falta un manual ni aprender la teoría completa. Me adapto a cualquier situación.",
+    "hero.lead": "Soy Gonzalo <strong>“GRX”</strong>, <strong>head coach de Oxygen Gaming</strong> en el Circuito Tormenta y jugador asiduo de alto nivel. Coacheo desde mi propia experiencia jugando SoloQ cada día, aplicando lo aprendido en la escena competitiva, no hace falta un manual ni aprender la teoría completa. Me adapto a cualquier situación.",
     "hero.leaguepedia": "Mi Leaguepedia ↗",
     "stats.rank": "Rango actual",
     "stats.yearsValue": "+4 años",
@@ -22,14 +22,19 @@ const translations = {
     "stats.peak": "Peak Rank Europa",
     "stats.coaching": "de coaching",
     "about.eyebrow": "Sobre mí",
-    "about.title": "De UCAM Esports al coaching individual",
-    "about.p1": "Empecé mi carrera competitiva en 2022 en la cantera de <strong>UCAM Esports Academy</strong>, compaginando la competición con mis estudios, en 2023 di el salto de suplente al primer equipo en <strong>Superliga</strong>. Desde entonces he competido con <strong>UCAM University Esports</strong>, <strong>Tan'i eSports</strong> y <strong>Oxygen Gaming</strong>, y soy <strong>tricampeón de la Liga Universitaria Española de League of Legends</strong> con UCAM University.",
+    "about.title": "De UCAM Esports a head coach",
+    "about.p1": "Empecé mi carrera competitiva en 2022 en la cantera de <strong>UCAM Esports Academy</strong>, compaginando la competición con mis estudios, en 2023 di el salto de suplente al primer equipo en <strong>Superliga</strong>. Desde entonces he competido con <strong>UCAM University Esports</strong>, <strong>Tan'i eSports</strong> y <strong>Oxygen Gaming</strong>, y soy <strong>tricampeón de la Liga Universitaria Española de League of Legends</strong> con UCAM University. Desde noviembre de 2026 soy <strong>head coach de Oxygen Gaming</strong>, número 1 del Circuito Tormenta.",
     "about.p2": "Actualmente soy <strong>Rank 2000 de EUW </strong>en soloQ (peak +1350 LP) y quiero ayudarte a entender la jungla como se juega a nivel competitivo: pathing, lectura de mapa, control de objetivos, matchups y toma de decisiones en early/mid game. Nada de teoría genérica - trabajamos sobre tus propias partidas.",
     "about.twitter": "Sígueme en X ↗",
     "about.photoAlt": "Gromix con la camiseta de UCAM Universidad Esports",
     "career.eyebrow": "Trayectoria",
     "career.title": "Mi carrera competitiva",
     "career.bannerAlt": "Gromix y UCAM Universidad Esports celebrando un título",
+    "career.o2g.date": "Nov 2026",
+    "career.o2g.title": "Head Coach de Oxygen Gaming",
+    "career.o2g.body": "Me incorporo como head coach de Oxygen Gaming, equipo número 1 del Circuito Tormenta (segunda división española) durante todo el año. Dirijo al equipo en draft, preparación de rivales y revisión de partidas.",
+    "career.o2g.link": "Ver el anuncio ↗",
+    "career.o2g.imgAlt": "Cartel de Oxygen Gaming dando la bienvenida a Gromix como head coach de League of Legends",
     "career.2026.title": "Tricampeón Liga Universitaria · Top 3 Circuito Tormenta",
     "career.2026.body": "Tercer título de la Liga Universitaria Española con UCAM University, además de un top 3 en el Circuito Tormenta, y empiezo a compaginarlo con coaching individual.",
     "career.2025.body": "Competición activa en distintos proyectos de la escena española, segunda división e iberian cup.",
@@ -101,10 +106,16 @@ const translations = {
     "reviews.role.pro": "Pro",
     "reviews.role.streamer": "Streamer",
     "reviews.role.student": "Alumno",
+    "reviews.kymist": "Después de 3 sesiones entiendo cómo y por qué tomar decisiones en la jungla. Revisamos varias partidas en cada sesión y pasé de jugar totalmente pasivo a castigar al jungla enemigo en cada error. He subido de Platino a Diamante.",
+    "reviews.solet": "Con unas pocas recomendaciones de builds y algo de micro, por fin soy competente con Qiyana en mi elo y me veo en lobbies más altos. Coach muy recomendable para mejorar con casi cualquier jungla.",
+    "reviews.tempest": "Me ha resuelto muchos problemas que tenía para subir en Master. Se mira tus partidas y analiza cada error para que no lo vuelvas a cometer. Ahora aplico sus consejos y estoy ganando partidas.",
+    "reviews.role.kymist": "Platino → Diamante",
+    "reviews.role.solet": "+604 LP en 30 días",
+    "reviews.role.tempest": "Master",
+    "reviews.sagiri": "Muy buena persona y coach. Te analiza a fondo tus partidas, se prepara las sesiones y te dice con claridad en qué deberías mejorar. Vale mucho la pena, no os va a defraudar.",
+    "reviews.polak": "Mejor de lo que me esperaba. Te da una visión del juego diferente a lo que los coach normales te dicen. Es realista y aplicable a las partidas.",
     "reviews.simpy": "Conozco a Gonzalo de la escena competitiva, sus sesiones van directas al grano, sin teoría vacía. Si de verdad quieres entender cómo se juega este rol a un nivel decente, GRX es el coach indicado.",
     "reviews.quevedo": "Gonzalo me ha ayudado muchísimo a corregir mis errores de macro y a no tiltearme en mis partidas. Te explica el control de objetivos y la toma de decisiones de una forma súper clara. Es cercano y profesional",
-    "reviews.polak": "Mejor de lo que me esperaba. Te da una visión del juego diferente a lo que los coach normales te dicen. Es realista y aplicable a las partidas.",
-    "reviews.irfs": "He compartido equipo con Gonzalo y, más allá de la experiencia competitiva, lo que de verdad le hace buen coach es la cantidad de horas que le mete a SoloQ.\nNo te va a vender humo con teorías súper complejas, te enseña de forma práctica a leer el mapa, castigar los errores del rival y tomar buenas decisiones en la jungla.",
     "reviews.sora": "Entré pensando que necesitaba mejorar mecánicas y acabé entendiendo que el problema era cómo tomaba decisiones. Gonzalo te explica el porqué de cada jugada y, sobre todo, te enseña a pensar por tu cuenta. Después de unas sesiones noté muchísimo la diferencia.",
     "contact.eyebrow": "Contacto",
     "contact.title": "¿Hablamos?",
@@ -116,7 +127,7 @@ const translations = {
   },
   en: {
     "meta.title": "GRX Coaching | Climb elo in League of Legends",
-    "meta.description": "League of Legends coaching with GRX. Climb elo with personalized sessions.",
+    "meta.description": "League of Legends coaching with GRX, Oxygen Gaming head coach. Climb elo with personalized sessions.",
     "lang.label": "Language",
     "nav.about": "About",
     "nav.career": "Career",
@@ -127,7 +138,7 @@ const translations = {
     "cta.book": "Book your session",
     "hero.eyebrow": "Improve your gameplay - Reach your full potential",
     "hero.title": "Climb elo with an experienced jungler",
-    "hero.lead": "I'm Gonzalo <strong>“GRX”</strong>, a high-elo player who's in SoloQ every day. I coach from my own experience, applying what I learned in the competitive scene — you don't need a textbook or the full theory. I adapt to any situation.",
+    "hero.lead": "I'm Gonzalo <strong>“GRX”</strong>, <strong>head coach of Oxygen Gaming</strong> in Circuito Tormenta and a high-elo player who's in SoloQ every day. I coach from my own experience, applying what I learned in the competitive scene — you don't need a textbook or the full theory. I adapt to any situation.",
     "hero.leaguepedia": "My Leaguepedia ↗",
     "stats.rank": "Current rank",
     "stats.yearsValue": "+4 years",
@@ -135,14 +146,19 @@ const translations = {
     "stats.peak": "Peak Rank Europe",
     "stats.coaching": "of coaching",
     "about.eyebrow": "About me",
-    "about.title": "From UCAM Esports to 1-on-1 coaching",
-    "about.p1": "I started my competitive career in 2022 in the <strong>UCAM Esports Academy</strong>, balancing competition with my studies. In 2023 I moved from substitute to the first team in <strong>Superliga</strong>. Since then I've competed with <strong>UCAM University Esports</strong>, <strong>Tan'i eSports</strong> and <strong>Oxygen Gaming</strong>, and I'm a <strong>three-time Spanish University League of Legends champion</strong> with UCAM University.",
+    "about.title": "From UCAM Esports to head coach",
+    "about.p1": "I started my competitive career in 2022 in the <strong>UCAM Esports Academy</strong>, balancing competition with my studies. In 2023 I moved from substitute to the first team in <strong>Superliga</strong>. Since then I've competed with <strong>UCAM University Esports</strong>, <strong>Tan'i eSports</strong> and <strong>Oxygen Gaming</strong>, and I'm a <strong>three-time Spanish University League of Legends champion</strong> with UCAM University. Since November 2026 I'm the <strong>head coach of Oxygen Gaming</strong>, number 1 in Circuito Tormenta.",
     "about.p2": "I'm currently <strong>Rank 2000 on EUW </strong>in SoloQ (peak +1350 LP) and I want to help you understand jungle the way it's played at a competitive level: pathing, map reading, objective control, matchups and early/mid-game decision-making. No generic theory — we work on your own games.",
     "about.twitter": "Follow me on X ↗",
     "about.photoAlt": "Gromix wearing the UCAM Universidad Esports jersey",
     "career.eyebrow": "Career",
     "career.title": "My competitive career",
     "career.bannerAlt": "Gromix and UCAM Universidad Esports celebrating a title",
+    "career.o2g.date": "Nov 2026",
+    "career.o2g.title": "Oxygen Gaming Head Coach",
+    "career.o2g.body": "I join Oxygen Gaming as head coach — the team ranked number 1 in Circuito Tormenta (Spain's second division) all year long. I lead the team on draft, opponent prep and game review.",
+    "career.o2g.link": "See the announcement ↗",
+    "career.o2g.imgAlt": "Oxygen Gaming poster welcoming Gromix as League of Legends head coach",
     "career.2026.title": "Three-time University League champion · Top 3 Circuito Tormenta",
     "career.2026.body": "Third Spanish University League title with UCAM University, plus a top 3 in Circuito Tormenta, and I start combining it with 1-on-1 coaching.",
     "career.2025.body": "Active competition across different Spanish-scene projects, second division and Iberian Cup.",
@@ -214,10 +230,16 @@ const translations = {
     "reviews.role.pro": "Pro",
     "reviews.role.streamer": "Streamer",
     "reviews.role.student": "Student",
+    "reviews.kymist": "After 3 sessions I understand how and why to make decisions in the jungle. We reviewed several games each session and I went from playing completely passive to punishing the enemy jungler for every mistake. I climbed from Platinum to Diamond.",
+    "reviews.solet": "After a few build recommendations from GRX and a bit of micro management, I finally reached the goal of being competent with Qiyana in my usual elo and projecting myself to higher lobbies. Recommended coach, really worth it for improving on almost any jungler.",
+    "reviews.tempest": "He solved a lot of the problems I had climbing in Master. He watches your games and breaks down every mistake so you don't make it again. Now I'm applying his advice and winning games.",
+    "reviews.role.kymist": "Platinum → Diamond",
+    "reviews.role.solet": "+604 LP in 30 days",
+    "reviews.role.tempest": "Master",
+    "reviews.sagiri": "Great person and coach. He analyzes your games in depth, prepares the sessions and tells you clearly what you should improve. Totally worth it, he won't let you down.",
+    "reviews.polak": "Better than I expected. He gives you a different view of the game from what regular coaches tell you. It's realistic and applicable in games.",
     "reviews.simpy": "I've known Gonzalo from the competitive scene. His sessions get straight to the point, with no empty theory. If you really want to understand how this role is played at a decent level, GRX is the right coach.",
     "reviews.quevedo": "Gonzalo has helped me a lot to fix my macro mistakes and to not tilt in my games. He explains objective control and decision-making super clearly. He's approachable and professional.",
-    "reviews.polak": "Better than I expected. He gives you a different view of the game from what regular coaches tell you. It's realistic and applicable in games.",
-    "reviews.irfs": "I've played on a team with Gonzalo and, beyond the competitive experience, what really makes him a good coach is the hours he puts into SoloQ.\nHe won't sell you smoke with overly complex theories — he teaches you practically how to read the map, punish the opponent's mistakes and make good jungle decisions.",
     "reviews.sora": "I came in thinking I needed to improve mechanics and ended up understanding that the problem was how I made decisions. Gonzalo explains the why behind every play and, above all, teaches you to think for yourself. After a few sessions I noticed a huge difference.",
     "contact.eyebrow": "Contact",
     "contact.title": "Let's talk",
@@ -245,6 +267,9 @@ function detectLang() {
   // y una URL propia que Google puede indexar.
   const fromUrl = langFromUrl();
   if (fromUrl) return fromUrl;
+
+  // Buscadores: siempre español en la portada (ver el script del <head>).
+  if (window.__grxIsBot) return "es";
 
   try {
     const saved = localStorage.getItem(LANG_KEY);
@@ -312,6 +337,17 @@ function applyLang(lang) {
   if (description) description.setAttribute("content", t("meta.description"));
   if (ogTitle) ogTitle.setAttribute("content", t("meta.title"));
   if (ogDescription) ogDescription.setAttribute("content", t("meta.description"));
+
+  // Cada idioma tiene su URL: la portada en español y /?lang=en en inglés.
+  const pageUrl = next === "en" ? "https://grx.coach/?lang=en" : "https://grx.coach/";
+  const canonical = document.querySelector('link[rel="canonical"]');
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  const ogLocale = document.querySelector('meta[property="og:locale"]');
+  const ogLocaleAlt = document.querySelector('meta[property="og:locale:alternate"]');
+  if (canonical) canonical.setAttribute("href", pageUrl);
+  if (ogUrl) ogUrl.setAttribute("content", pageUrl);
+  if (ogLocale) ogLocale.setAttribute("content", next === "en" ? "en_US" : "es_ES");
+  if (ogLocaleAlt) ogLocaleAlt.setAttribute("content", next === "en" ? "es_ES" : "en_US");
 
   document.querySelectorAll(".lang-btn").forEach((btn) => {
     const active = btn.getAttribute("data-set-lang") === next;
