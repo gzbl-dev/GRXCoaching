@@ -127,6 +127,7 @@
       <a href="#packs" data-i18n="nav.packs">Packs</a>
       <a href="#proceso" data-i18n="nav.process">Cómo funciona</a>
       <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
+      <a href="#contenido" data-i18n="nav.content">Contenido</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
       <a href="#contacto" data-i18n="nav.contact">Contacto</a>
     </nav>
@@ -452,8 +453,49 @@
     </div>
   </section>
 
+  <!-- CONTENIDO GRATUITO
+       Para añadir otro vídeo: copia el <article class="video-feature"> (o pide una
+       rejilla de tarjetas cuando haya varios), cambia data-yt-id, la miniatura y los textos,
+       y añade su VideoObject en el JSON-LD de abajo. -->
+  <section id="contenido" class="section section-alt reveal">
+    <div class="container">
+      <p class="section-eyebrow center" data-i18n="content.eyebrow">Contenido gratuito</p>
+      <h2 class="center" data-i18n="content.title">Mira una sesión completa, sin cortes</h2>
+      <p class="section-lead center" data-i18n="content.lead">Subo coachings íntegros a YouTube para que veas exactamente cómo trabajo antes de reservar. Gratis, y con claves que puedes aplicar en tu próxima partida.</p>
+
+      <article class="video-feature">
+        <div class="yt-lite" data-yt-id="8huiJKIhYx8">
+          <img src="assets/video-graves-coaching.webp" srcset="assets/video-graves-coaching-640.webp 640w, assets/video-graves-coaching.webp 1280w" sizes="(max-width: 900px) 100vw, 640px" width="1280" height="720" loading="lazy" decoding="async" data-i18n="content.v1.thumbAlt" data-i18n-attr="alt" alt="Miniatura: coaching a un jungla Master con Graves">
+          <button type="button" class="yt-lite-play" data-i18n="content.play" data-i18n-attr="aria-label" aria-label="Reproducir vídeo">
+            <svg viewBox="0 0 68 48" width="68" height="48" aria-hidden="true"><path class="yt-lite-play-bg" d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 13 .1 24 .1 24s0 11 1.4 16.3a8.5 8.5 0 0 0 6 6C12.7 47.7 34 47.7 34 47.7s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6C67.9 35 67.9 24 67.9 24s0-11-1.4-16.3Z"/><path class="yt-lite-play-arrow" d="M45 24 27 14v20Z"/></svg>
+          </button>
+          <span class="yt-lite-duration">1:15:32</span>
+        </div>
+
+        <div class="video-feature-body">
+          <p class="video-tags"><span class="video-tag video-tag-free" data-i18n="content.free">Gratis</span><span class="video-tag" data-i18n="content.v1.tag">Coaching completo · Jungla</span></p>
+          <h3 data-i18n="content.v1.title">Coaching a un jungla Master: análisis de scrim con Graves</h3>
+          <p data-i18n="content.v1.body">Analizo una scrim de Pangolin, jungla Master con peak de 1000 LP, jugando Graves. Nos centramos en cómo jugar el personaje y en cuándo aprovechar sus ventanas:</p>
+          <ul class="price-features">
+            <li data-i18n="content.v1.f1">Cuándo pelear y cuándo farmear</li>
+            <li data-i18n="content.v1.f2">Cómo convertir tu ventaja en objetivos</li>
+            <li data-i18n="content.v1.f3">Tips y básicos de Graves en la jungla</li>
+          </ul>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=8huiJKIhYx8" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="content.watchYt">Ver en YouTube ↗</a>
+            <a href="https://www.youtube.com/@gromixlol?sub_confirmation=1" target="_blank" rel="noopener" class="link-inline" data-i18n="content.subscribe">Suscríbete al canal ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <p class="steps-note content-cta" data-i18n="content.cta" data-i18n-html>
+        <strong>¿Quieres que analice tu partida así?</strong> <a href="#packs" class="link-inline">Elige tu pack</a> y la próxima sesión es la tuya.
+      </p>
+    </div>
+  </section>
+
   <!-- FAQ -->
-  <section id="faq" class="section section-alt reveal">
+  <section id="faq" class="section reveal">
     <div class="container container-narrow">
       <p class="section-eyebrow center" data-i18n="faq.eyebrow">Preguntas frecuentes</p>
       <h2 class="center" data-i18n="faq.title">Dudas antes de reservar</h2>
@@ -484,7 +526,7 @@
   </section>
 
   <!-- CONTACTO -->
-  <section id="contacto" class="section reveal">
+  <section id="contacto" class="section section-alt reveal">
     <div class="container">
       <p class="section-eyebrow center" data-i18n="contact.eyebrow">Contacto</p>
       <h2 class="center" data-i18n="contact.title">¿Hablamos?</h2>
@@ -557,7 +599,8 @@
       "sameAs": [
         "https://x.com/gromix_lol",
         "https://lol.fandom.com/wiki/GRX",
-        "https://discord.gg/baMFcSazEA"
+        "https://discord.gg/baMFcSazEA",
+        "https://www.youtube.com/@gromixlol"
       ],
       "knowsAbout": [
         "League of Legends",
@@ -687,6 +730,25 @@
           }
         }
       ]
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://grx.coach/#video-graves-coaching",
+      "name": "Coaching Jungla Master | Analisis Scrim Graves",
+      "description": "Analisis de una scrim de un jungla Master (peak 1000 LP) jugando Graves: cuando pelear, cuando farmear y como convertir la ventaja en objetivos.",
+      "thumbnailUrl": [
+        "https://grx.coach/assets/video-graves-coaching.webp",
+        "https://i.ytimg.com/vi/8huiJKIhYx8/maxresdefault.jpg"
+      ],
+      "uploadDate": "2026-11-18T12:33:52-08:00",
+      "duration": "PT1H15M32S",
+      "contentUrl": "https://www.youtube.com/watch?v=8huiJKIhYx8",
+      "embedUrl": "https://www.youtube-nocookie.com/embed/8huiJKIhYx8",
+      "inLanguage": "es",
+      "isAccessibleForFree": true,
+      "creator": {
+        "@id": "https://grx.coach/#gonzalo"
+      }
     },
     {
       "@type": "WebSite",

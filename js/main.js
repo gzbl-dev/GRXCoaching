@@ -338,3 +338,22 @@ faqItems.forEach((item) => {
     animateFaq(item, opening);
   });
 });
+
+// Vídeos de YouTube "lite": hasta que no pulsas play solo se carga la miniatura local.
+// Asi la web no descarga ~1 MB de YouTube ni deja cookies de terceros a quien no lo ve.
+document.querySelectorAll(".yt-lite[data-yt-id]").forEach((box) => {
+  function play() {
+    if (box.classList.contains("is-playing")) return;
+    const id = box.getAttribute("data-yt-id");
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
+    iframe.title = (box.querySelector("img") || {}).alt || "YouTube";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    box.classList.add("is-playing");
+    box.replaceChildren(iframe);
+    iframe.focus();
+  }
+  box.addEventListener("click", play);
+});
